@@ -1,0 +1,665 @@
+$Alanine
+Analysis of Variance Table
+
+Response: Labeled
+                        Df    Sum Sq
+Labeling                 1 0.0009883
+Treatment                2 0.0034655
+Time                     3 0.0009586
+Labeling:Treatment       2 0.0000731
+Labeling:Time            3 0.0002682
+Treatment:Time           6 0.0003962
+Labeling:Treatment:Time  6 0.0003390
+Residuals               95 0.0052541
+                           Mean Sq F value
+Labeling                0.00098829 17.8695
+Treatment               0.00173274 31.3301
+Time                    0.00031953  5.7774
+Labeling:Treatment      0.00003654  0.6607
+Labeling:Time           0.00008939  1.6163
+Treatment:Time          0.00006603  1.1940
+Labeling:Treatment:Time 0.00005650  1.0215
+Residuals               0.00005531        
+                           Pr(>F)    
+Labeling                5.438e-05 ***
+Treatment               3.549e-11 ***
+Time                     0.001133 ** 
+Labeling:Treatment       0.518847    
+Labeling:Time            0.190740    
+Treatment:Time           0.316235    
+Labeling:Treatment:Time  0.416175    
+Residuals                            
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$Arginine
+Analysis of Variance Table
+
+Response: Labeled
+                        Df   Sum Sq   Mean Sq
+Labeling                 1 0.000037 0.0000366
+Treatment                2 0.032447 0.0162233
+Time                     3 0.000504 0.0001681
+Labeling:Treatment       2 0.000017 0.0000084
+Labeling:Time            3 0.000231 0.0000771
+Treatment:Time           6 0.000180 0.0000300
+Labeling:Treatment:Time  6 0.000606 0.0001010
+Residuals               95 0.008314 0.0000875
+                         F value Pr(>F)    
+Labeling                  0.4186 0.5192    
+Treatment               185.3855 <2e-16 ***
+Time                      1.9214 0.1313    
+Labeling:Treatment        0.0960 0.9085    
+Labeling:Time             0.8810 0.4539    
+Treatment:Time            0.3426 0.9126    
+Labeling:Treatment:Time   1.1540 0.3376    
+Residuals                                  
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$Asparagine
+Analysis of Variance Table
+
+Response: Labeled
+                        Df   Sum Sq   Mean Sq
+Labeling                 1 0.000843 0.0008427
+Treatment                2 0.027446 0.0137231
+Time                     3 0.001002 0.0003339
+Labeling:Treatment       2 0.001451 0.0007255
+Labeling:Time            3 0.002197 0.0007323
+Treatment:Time           6 0.004473 0.0007454
+Labeling:Treatment:Time  6 0.006801 0.0011334
+Residuals               95 0.046774 0.0004924
+                        F value    Pr(>F)    
+Labeling                 1.7115   0.19394    
+Treatment               27.8720 2.989e-10 ***
+Time                     0.6781   0.56758    
+Labeling:Treatment       1.4735   0.23431    
+Labeling:Time            1.4874   0.22294    
+Treatment:Time           1.5140   0.18187    
+Labeling:Treatment:Time  2.3020   0.04053 *  
+Residuals                                    
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$`Aspartic acid`
+Analysis of Variance Table
+
+Response: Labeled
+                        Df    Sum Sq
+Labeling                 1 0.0007017
+Treatment                2 0.0001252
+Time                     3 0.0005513
+Labeling:Treatment       2 0.0001674
+Labeling:Time            3 0.0008547
+Treatment:Time           6 0.0003978
+Labeling:Treatment:Time  6 0.0009641
+Residuals               95 0.0069604
+                           Mean Sq F value
+Labeling                0.00070167  9.5768
+Treatment               0.00006260  0.8544
+Time                    0.00018376  2.5081
+Labeling:Treatment      0.00008371  1.1425
+Labeling:Time           0.00028491  3.8886
+Treatment:Time          0.00006631  0.9050
+Labeling:Treatment:Time 0.00016069  2.1931
+Residuals               0.00007327        
+                          Pr(>F)   
+Labeling                0.002589 **
+Treatment               0.428798   
+Time                    0.063523 . 
+Labeling:Treatment      0.323378   
+Labeling:Time           0.011405 * 
+Treatment:Time          0.494823   
+Labeling:Treatment:Time 0.050236 . 
+Residuals                          
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$Citrulline
+Analysis of Variance Table
+
+Response: Labeled
+                        Df   Sum Sq   Mean Sq
+Labeling                 1 0.003674 0.0036741
+Treatment                2 0.000335 0.0001676
+Time                     3 0.019048 0.0063492
+Labeling:Treatment       2 0.000023 0.0000116
+Labeling:Time            3 0.001076 0.0003587
+Treatment:Time           6 0.002543 0.0004238
+Labeling:Treatment:Time  6 0.002399 0.0003998
+Residuals               95 0.050990 0.0005367
+                        F value    Pr(>F)    
+Labeling                 6.8452   0.01034 *  
+Treatment                0.3122   0.73255    
+Time                    11.8293 1.189e-06 ***
+Labeling:Treatment       0.0215   0.97872    
+Labeling:Time            0.6684   0.57353    
+Treatment:Time           0.7896   0.58024    
+Labeling:Treatment:Time  0.7450   0.61485    
+Residuals                                    
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$GABA
+Analysis of Variance Table
+
+Response: Labeled
+                        Df    Sum Sq   Mean Sq
+Labeling                 1 0.0216852 0.0216852
+Treatment                2 0.0009529 0.0004764
+Time                     3 0.0028267 0.0009422
+Labeling:Treatment       2 0.0017372 0.0008686
+Labeling:Time            3 0.0028233 0.0009411
+Treatment:Time           6 0.0006447 0.0001074
+Labeling:Treatment:Time  6 0.0008311 0.0001385
+Residuals               95 0.0045533 0.0000479
+                         F value    Pr(>F)    
+Labeling                452.4430 < 2.2e-16 ***
+Treatment                 9.9403 0.0001203 ***
+Time                     19.6587 5.379e-10 ***
+Labeling:Treatment       18.1229 2.152e-07 ***
+Labeling:Time            19.6354 5.495e-10 ***
+Treatment:Time            2.2417 0.0456564 *  
+Labeling:Treatment:Time   2.8901 0.0124433 *  
+Residuals                                     
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$`Glutamic acid`
+Analysis of Variance Table
+
+Response: Labeled
+                        Df   Sum Sq  Mean Sq
+Labeling                 1 0.039042 0.039042
+Treatment                2 0.000088 0.000044
+Time                     3 0.001707 0.000569
+Labeling:Treatment       2 0.000203 0.000102
+Labeling:Time            3 0.001301 0.000434
+Treatment:Time           6 0.000444 0.000074
+Labeling:Treatment:Time  6 0.000447 0.000074
+Residuals               95 0.007166 0.000075
+                         F value    Pr(>F)    
+Labeling                517.5634 < 2.2e-16 ***
+Treatment                 0.5813 0.5611532    
+Time                      7.5440 0.0001399 ***
+Labeling:Treatment        1.3471 0.2649110    
+Labeling:Time             5.7472 0.0011745 ** 
+Treatment:Time            0.9809 0.4426312    
+Labeling:Treatment:Time   0.9873 0.4383520    
+Residuals                                     
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$Glutamine
+Analysis of Variance Table
+
+Response: Labeled
+                        Df    Sum Sq   Mean Sq
+Labeling                 1 0.0283223 0.0283223
+Treatment                2 0.0108174 0.0054087
+Time                     3 0.0030562 0.0010187
+Labeling:Treatment       2 0.0104099 0.0052050
+Labeling:Time            3 0.0048735 0.0016245
+Treatment:Time           6 0.0029078 0.0004846
+Labeling:Treatment:Time  6 0.0037982 0.0006330
+Residuals               95 0.0113528 0.0001195
+                         F value    Pr(>F)    
+Labeling                237.0008 < 2.2e-16 ***
+Treatment                45.2599 1.561e-14 ***
+Time                      8.5248 4.524e-05 ***
+Labeling:Treatment       43.5552 3.767e-14 ***
+Labeling:Time            13.5938 1.884e-07 ***
+Treatment:Time            4.0554  0.001158 ** 
+Labeling:Treatment:Time   5.2972 9.492e-05 ***
+Residuals                                     
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$Glycine
+Analysis of Variance Table
+
+Response: Labeled
+                        Df    Sum Sq
+Labeling                 1 0.0000663
+Treatment                2 0.0003120
+Time                     3 0.0001875
+Labeling:Treatment       2 0.0000850
+Labeling:Time            3 0.0002457
+Treatment:Time           6 0.0001413
+Labeling:Treatment:Time  6 0.0001358
+Residuals               95 0.0044768
+                           Mean Sq F value
+Labeling                6.6296e-05  1.4069
+Treatment               1.5599e-04  3.3101
+Time                    6.2511e-05  1.3265
+Labeling:Treatment      4.2481e-05  0.9015
+Labeling:Time           8.1883e-05  1.7376
+Treatment:Time          2.3550e-05  0.4997
+Labeling:Treatment:Time 2.2638e-05  0.4804
+Residuals               4.7124e-05        
+                         Pr(>F)  
+Labeling                0.23854  
+Treatment               0.04077 *
+Time                    0.27036  
+Labeling:Treatment      0.40941  
+Labeling:Time           0.16452  
+Treatment:Time          0.80713  
+Labeling:Treatment:Time 0.82144  
+Residuals                        
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$Histidine
+Analysis of Variance Table
+
+Response: Labeled
+                        Df    Sum Sq   Mean Sq
+Labeling                 1 0.0000093 0.0000093
+Treatment                2 0.0114060 0.0057030
+Time                     3 0.0005001 0.0001667
+Labeling:Treatment       2 0.0001237 0.0000619
+Labeling:Time            3 0.0002668 0.0000889
+Treatment:Time           6 0.0001851 0.0000308
+Labeling:Treatment:Time  6 0.0013185 0.0002197
+Residuals               95 0.0093095 0.0000980
+                        F value  Pr(>F)    
+Labeling                 0.0952 0.75837    
+Treatment               58.1970 < 2e-16 ***
+Time                     1.7010 0.17205    
+Labeling:Treatment       0.6313 0.53411    
+Labeling:Time            0.9076 0.44049    
+Treatment:Time           0.3148 0.92787    
+Labeling:Treatment:Time  2.2424 0.04559 *  
+Residuals                                  
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$Isoleucine
+Analysis of Variance Table
+
+Response: Labeled
+                        Df    Sum Sq
+Labeling                 1 0.0001178
+Treatment                2 0.0000082
+Time                     3 0.0002115
+Labeling:Treatment       2 0.0001112
+Labeling:Time            3 0.0000275
+Treatment:Time           6 0.0001516
+Labeling:Treatment:Time  6 0.0005726
+Residuals               95 0.0051949
+                           Mean Sq F value
+Labeling                1.1783e-04  2.1547
+Treatment               4.1140e-06  0.0752
+Time                    7.0513e-05  1.2895
+Labeling:Treatment      5.5622e-05  1.0172
+Labeling:Time           9.1510e-06  0.1673
+Treatment:Time          2.5271e-05  0.4621
+Labeling:Treatment:Time 9.5441e-05  1.7454
+Residuals               5.4683e-05        
+                        Pr(>F)
+Labeling                0.1454
+Treatment               0.9276
+Time                    0.2825
+Labeling:Treatment      0.3655
+Labeling:Time           0.9182
+Treatment:Time          0.8347
+Labeling:Treatment:Time 0.1189
+Residuals                     
+
+$Leucine
+Analysis of Variance Table
+
+Response: Labeled
+                        Df    Sum Sq
+Labeling                 1 0.0000355
+Treatment                2 0.0009083
+Time                     3 0.0003686
+Labeling:Treatment       2 0.0000525
+Labeling:Time            3 0.0003664
+Treatment:Time           6 0.0001703
+Labeling:Treatment:Time  6 0.0002784
+Residuals               95 0.0084725
+                           Mean Sq F value
+Labeling                0.00003546  0.3976
+Treatment               0.00045413  5.0920
+Time                    0.00012286  1.3775
+Labeling:Treatment      0.00002626  0.2944
+Labeling:Time           0.00012214  1.3695
+Treatment:Time          0.00002838  0.3183
+Labeling:Treatment:Time 0.00004640  0.5202
+Residuals               0.00008918        
+                         Pr(>F)   
+Labeling                0.52983   
+Treatment               0.00793 **
+Time                    0.25438   
+Labeling:Treatment      0.74563   
+Labeling:Time           0.25685   
+Treatment:Time          0.92602   
+Labeling:Treatment:Time 0.79168   
+Residuals                         
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$Lysine
+Analysis of Variance Table
+
+Response: Labeled
+                        Df   Sum Sq   Mean Sq
+Labeling                 1 0.000851 0.0008514
+Treatment                2 0.025461 0.0127307
+Time                     3 0.001354 0.0004515
+Labeling:Treatment       2 0.003126 0.0015630
+Labeling:Time            3 0.003398 0.0011328
+Treatment:Time           6 0.004443 0.0007405
+Labeling:Treatment:Time  6 0.004006 0.0006677
+Residuals               95 0.045840 0.0004825
+                        F value   Pr(>F)    
+Labeling                 1.7644  0.18726    
+Treatment               26.3831 7.71e-10 ***
+Time                     0.9356  0.42670    
+Labeling:Treatment       3.2392  0.04356 *  
+Labeling:Time            2.3475  0.07755 .  
+Treatment:Time           1.5346  0.17523    
+Labeling:Treatment:Time  1.3837  0.22914    
+Residuals                                   
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$Methionine
+Analysis of Variance Table
+
+Response: Labeled
+                        Df    Sum Sq
+Labeling                 1 0.0003386
+Treatment                2 0.0000913
+Time                     3 0.0002594
+Labeling:Treatment       2 0.0002095
+Labeling:Time            3 0.0003796
+Treatment:Time           6 0.0010213
+Labeling:Treatment:Time  6 0.0007127
+Residuals               95 0.0119526
+                           Mean Sq F value
+Labeling                0.00033859  2.6911
+Treatment               0.00004564  0.3628
+Time                    0.00008647  0.6873
+Labeling:Treatment      0.00010475  0.8326
+Labeling:Time           0.00012652  1.0056
+Treatment:Time          0.00017021  1.3529
+Labeling:Treatment:Time 0.00011879  0.9442
+Residuals               0.00012582        
+                        Pr(>F)
+Labeling                0.1042
+Treatment               0.6967
+Time                    0.5620
+Labeling:Treatment      0.4381
+Labeling:Time           0.3939
+Treatment:Time          0.2417
+Labeling:Treatment:Time 0.4674
+Residuals                     
+
+$Norvaline
+Analysis of Variance Table
+
+Response: Labeled
+                        Df    Sum Sq
+Labeling                 1 0.0002532
+Treatment                2 0.0053985
+Time                     3 0.0017540
+Labeling:Treatment       2 0.0012400
+Labeling:Time            3 0.0006458
+Treatment:Time           6 0.0010576
+Labeling:Treatment:Time  6 0.0006290
+Residuals               95 0.0280248
+                           Mean Sq F value
+Labeling                0.00025318  0.8582
+Treatment               0.00269923  9.1500
+Time                    0.00058467  1.9820
+Labeling:Treatment      0.00062002  2.1018
+Labeling:Time           0.00021528  0.7298
+Treatment:Time          0.00017626  0.5975
+Labeling:Treatment:Time 0.00010483  0.3554
+Residuals               0.00029500        
+                           Pr(>F)    
+Labeling                0.3565810    
+Treatment               0.0002323 ***
+Time                    0.1219007    
+Labeling:Treatment      0.1278863    
+Labeling:Time           0.5367390    
+Treatment:Time          0.7316399    
+Labeling:Treatment:Time 0.9051466    
+Residuals                            
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$Phenylalanine
+Analysis of Variance Table
+
+Response: Labeled
+                        Df    Sum Sq   Mean Sq
+Labeling                 1 0.0000031 0.0000031
+Treatment                2 0.0115051 0.0057525
+Time                     3 0.0015841 0.0005280
+Labeling:Treatment       2 0.0004507 0.0002253
+Labeling:Time            3 0.0002294 0.0000765
+Treatment:Time           6 0.0039060 0.0006510
+Labeling:Treatment:Time  6 0.0001052 0.0000175
+Residuals               95 0.0062665 0.0000660
+                        F value    Pr(>F)    
+Labeling                 0.0464   0.82988    
+Treatment               87.2088 < 2.2e-16 ***
+Time                     8.0048 8.209e-05 ***
+Labeling:Treatment       3.4162   0.03692 *  
+Labeling:Time            1.1592   0.32950    
+Treatment:Time           9.8691 1.916e-08 ***
+Labeling:Treatment:Time  0.2658   0.95153    
+Residuals                                    
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$Proline
+Analysis of Variance Table
+
+Response: Labeled
+                        Df    Sum Sq
+Labeling                 1 0.0004102
+Treatment                2 0.0017131
+Time                     3 0.0039974
+Labeling:Treatment       2 0.0003712
+Labeling:Time            3 0.0009702
+Treatment:Time           6 0.0018623
+Labeling:Treatment:Time  6 0.0009921
+Residuals               95 0.0165194
+                           Mean Sq F value
+Labeling                0.00041016  2.3587
+Treatment               0.00085653  4.9258
+Time                    0.00133248  7.6628
+Labeling:Treatment      0.00018558  1.0672
+Labeling:Time           0.00032339  1.8597
+Treatment:Time          0.00031038  1.7850
+Labeling:Treatment:Time 0.00016536  0.9509
+Residuals               0.00017389        
+                           Pr(>F)    
+Labeling                0.1279068    
+Treatment               0.0092167 ** 
+Time                    0.0001219 ***
+Labeling:Treatment      0.3480539    
+Labeling:Time           0.1416725    
+Treatment:Time          0.1103568    
+Labeling:Treatment:Time 0.4627977    
+Residuals                            
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$Serine
+Analysis of Variance Table
+
+Response: Labeled
+                        Df    Sum Sq
+Labeling                 1 0.0001018
+Treatment                2 0.0036685
+Time                     3 0.0005026
+Labeling:Treatment       2 0.0001202
+Labeling:Time            3 0.0000942
+Treatment:Time           6 0.0005597
+Labeling:Treatment:Time  6 0.0007653
+Residuals               95 0.0058113
+                           Mean Sq F value
+Labeling                0.00010183  1.6647
+Treatment               0.00183424 29.9855
+Time                    0.00016752  2.7385
+Labeling:Treatment      0.00006010  0.9824
+Labeling:Time           0.00003140  0.5133
+Treatment:Time          0.00009329  1.5250
+Labeling:Treatment:Time 0.00012755  2.0852
+Residuals               0.00006117        
+                           Pr(>F)    
+Labeling                  0.20010    
+Treatment               8.035e-11 ***
+Time                      0.04768 *  
+Labeling:Treatment        0.37817    
+Labeling:Time             0.67412    
+Treatment:Time            0.17829    
+Labeling:Treatment:Time   0.06205 .  
+Residuals                            
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$Threonine
+Analysis of Variance Table
+
+Response: Labeled
+                        Df    Sum Sq
+Labeling                 1 0.0000016
+Treatment                2 0.0004849
+Time                     3 0.0000267
+Labeling:Treatment       2 0.0001260
+Labeling:Time            3 0.0001084
+Treatment:Time           6 0.0004909
+Labeling:Treatment:Time  6 0.0001869
+Residuals               95 0.0069847
+                           Mean Sq F value
+Labeling                1.5630e-06  0.0213
+Treatment               2.4244e-04  3.2975
+Time                    8.9040e-06  0.1211
+Labeling:Treatment      6.2981e-05  0.8566
+Labeling:Time           3.6121e-05  0.4913
+Treatment:Time          8.1811e-05  1.1127
+Labeling:Treatment:Time 3.1148e-05  0.4236
+Residuals               7.3523e-05        
+                         Pr(>F)  
+Labeling                0.88437  
+Treatment               0.04125 *
+Time                    0.94747  
+Labeling:Treatment      0.42785  
+Labeling:Time           0.68916  
+Treatment:Time          0.36080  
+Labeling:Treatment:Time 0.86160  
+Residuals                        
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$Tryptophan
+Analysis of Variance Table
+
+Response: Labeled
+                        Df    Sum Sq   Mean Sq
+Labeling                 1 0.0000393 0.0000393
+Treatment                2 0.0298665 0.0149333
+Time                     3 0.0007992 0.0002664
+Labeling:Treatment       2 0.0002461 0.0001231
+Labeling:Time            3 0.0005602 0.0001867
+Treatment:Time           6 0.0009023 0.0001504
+Labeling:Treatment:Time  6 0.0014021 0.0002337
+Residuals               95 0.0159561 0.0001680
+                        F value Pr(>F)    
+Labeling                 0.2341 0.6296    
+Treatment               88.9101 <2e-16 ***
+Time                     1.5861 0.1979    
+Labeling:Treatment       0.7326 0.4833    
+Labeling:Time            1.1119 0.3483    
+Treatment:Time           0.8953 0.5017    
+Labeling:Treatment:Time  1.3913 0.2261    
+Residuals                                 
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$Tyrosine
+Analysis of Variance Table
+
+Response: Labeled
+                        Df   Sum Sq   Mean Sq
+Labeling                 1 0.000291 0.0002913
+Treatment                2 0.051485 0.0257424
+Time                     3 0.000339 0.0001130
+Labeling:Treatment       2 0.001546 0.0007732
+Labeling:Time            3 0.000530 0.0001768
+Treatment:Time           6 0.000414 0.0000690
+Labeling:Treatment:Time  6 0.000583 0.0000971
+Residuals               95 0.006246 0.0000657
+                         F value    Pr(>F)    
+Labeling                  4.4314   0.03792 *  
+Treatment               391.5512 < 2.2e-16 ***
+Time                      1.7191   0.16829    
+Labeling:Treatment       11.7604 2.733e-05 ***
+Labeling:Time             2.6892   0.05071 .  
+Treatment:Time            1.0501   0.39823    
+Labeling:Treatment:Time   1.4768   0.19440    
+Residuals                                     
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$Valine
+Analysis of Variance Table
+
+Response: Labeled
+                        Df    Sum Sq
+Labeling                 1 0.0000032
+Treatment                2 0.0039942
+Time                     3 0.0000025
+Labeling:Treatment       2 0.0000244
+Labeling:Time            3 0.0000812
+Treatment:Time           6 0.0000426
+Labeling:Treatment:Time  6 0.0003161
+Residuals               95 0.0042231
+                           Mean Sq F value
+Labeling                0.00000319  0.0718
+Treatment               0.00199708 44.9253
+Time                    0.00000083  0.0188
+Labeling:Treatment      0.00001221  0.2747
+Labeling:Time           0.00002705  0.6086
+Treatment:Time          0.00000711  0.1598
+Labeling:Treatment:Time 0.00005268  1.1850
+Residuals               0.00004445        
+                           Pr(>F)    
+Labeling                   0.7893    
+Treatment               1.853e-14 ***
+Time                       0.9965    
+Labeling:Treatment         0.7604    
+Labeling:Time              0.6110    
+Treatment:Time             0.9866    
+Labeling:Treatment:Time    0.3209    
+Residuals                            
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
