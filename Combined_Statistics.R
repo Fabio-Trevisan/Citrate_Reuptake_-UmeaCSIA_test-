@@ -10,6 +10,8 @@ library(reshape2)
 
 #Exudates times statistics ####
 
+#REPLICATE RESULTS USING UNLABELED AS DATA VARIABLE (95% INSTEAD OF 5%) AND CHECK RELIABILITY OF RESULTS
+
 #Read CSV ####
 df <- read.csv("DATA enrichment.csv", sep=";",
                   header=T)
@@ -258,43 +260,14 @@ Enrichment_df$P_Value <- P_Value_df$P_Value  #Combine df --> add column with P_V
 z <- 0.05 #filtering ratio
 Filtered <- Enrichment_df[Enrichment_df$`P_Value`<z,] #P_Value filtering >z
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Filtered <- Filtered[,1:nr.] #remove columns (samples)
-
-#Cleaning
-Clean_df <- data.frame(t(Filtered)) #invert row/columns
-Clean_df <- data.frame(Names = row.names(Clean_df), Clean_df) #extract rownames into column
-rownames(Clean_df) <- NULL #clean row names
-Clean_df <- extract(Clean_df, Names, into = c("Tr", "Blank","Time"), "(.{1})(.{1})(.{1})", remove=T) #separate Treatment from Time
-Clean_df <- Clean_df[!str_detect(names(Clean_df), "Blank")]
-
 #save
-write.csv(Clean_df, file = paste("Exudates_Significant", Filter, ".csv", sep="_"), row.names=FALSE)
+write.csv(Filtered, file = "AA_Significant_Enrichment.csv", row.names=FALSE)
 
 
 
 
 
-#summary other variables
+#summary other variables ()
 Summary_table_Relative_abundance <- ddply(df, c("Compound", "Time", "Labeling", "Treatment"), summarise,
                                           N    = sum(!is.na(Relative_abundance)),
                                           mean = mean(Relative_abundance, na.rm=TRUE),
