@@ -73,8 +73,16 @@ Summary_table_Labeled <- ddply(df, c("Compound", "Time", "Labeling", "Treatment"
                                se   = sd / sqrt(N))
 write.table(Summary_table_Labeled, file = "Labeled_Summary_table.csv", quote = FALSE, sep = ";")
 
-Enrichment_df <- cast(Summary_table_Labeled, Compound + Time + Treatment ~Labeling, value = "mean") 
-Enrichment_df$Enrichment <- Enrichment_df$L - Enrichment_df$U
+Enrichment_mean <- dcast(Summary_table_Labeled, Compound + Time + Treatment ~ Labeling, value.var = "mean") #cast (inverse of melt) to reorganice table and be able tu find difference in labeling
+Enrichment_se <- dcast(Summary_table_Labeled, Compound + Time + Treatment ~ Labeling, value.var = "se") #cast (inverse of melt) to reorganice table and be able tu find "se" in labeling
+
+Enrichment_df <- Enrichment_mean #combine means and se for both L and U
+Enrichment_df$L_se <- Enrichment_se$L
+Enrichment_df$U_se <- Enrichment_se$U
+Enrichment_df <- Enrichment_df[, c(1, 2, 3, 4, 6, 5, 7)] #reorder columns
+Enrichment_df$Enrichment <- Enrichment_df$L - Enrichment_df$U #calculata delta enrichment
+
+
 
 #Assumptions ####
 ## 1. Homogeneity of variances
@@ -138,7 +146,7 @@ sink(NULL)
 #T-Test (wilcox.test) of labeled vs UNlabeled!!! #### 
 # Wilcoxon Mann Withney U-test or Wilcoxon Rank sum test for INDIPENDENT data
 # not the Wilcoxon sign test for DEPENDENT samples
-#greater
+#greater --> for testing L > U (REAL HYPOTHESIS)
 Wilcox_test_greater <- lapply(vector_Compound, function(m){
   lapply(names(Subset_3[[m]]), function(i){ 
     lapply(names(Subset_3[[m]][[i]]), function(n){ 
@@ -156,7 +164,7 @@ for(i in vector_Compound) {
   }
 } #add names
 
-#less
+#less --> for testing U > L 
 Wilcox_test_less <- lapply(vector_Compound, function(m){
   lapply(names(Subset_3[[m]]), function(i){ 
     lapply(names(Subset_3[[m]][[i]]), function(n){ 
@@ -177,7 +185,7 @@ for(i in vector_Compound) {
 
 
 #P-Value print in original table ####
-#P-Value df preparation
+##P-Value df preparation ####
 Wilcox_test_greater_PValue <- lapply(vector_Compound, function(m){
   lapply(names(Wilcox_test_greater[[m]]), function(i){ 
     lapply(names(Wilcox_test_greater[[m]][[i]]), function(n){
@@ -205,7 +213,7 @@ for(i in vector_Compound) {
 
 
 
-#Transform list in dataframe
+##Transform list in dataframe ####
 P_Value <- lapply(vector_Compound, function(m){
   lapply(names(Wilcox_test_greater[[m]]), function(i){ 
     do.call(rbind.data.frame, Wilcox_test_greater_PValue[[m]][[i]])
@@ -229,61 +237,46 @@ for(i in vector_Compound) {
 } #move Time from rownames to column
 
 P_Value_3 <- lapply(vector_Compound, function(m){
-  melt(P_Value_2[[m]], id = "Time", value.name = "Labeled", variable.name = "Treatment")
+  melt(P_Value_2[[m]], id = "Time", value.name = "P_Value", variable.name = "Treatment")
 }) #melt to bring Treatment from columns to rows
 names(P_Value_3) <- vector_Compound #add names
 
 P_Value_df <- do.call(rbind.data.frame, P_Value_3) #merge all sub-dfs
-P_Value_df$Compound <- rownames(P_Value_df)
+P_Value_df$Compound <- rownames(P_Value_df) #move row nnames to column
+
+P_Value_df$Compound <-gsub("\\.|0|1|2|3|4|5|6|7|8|9","",as.character(P_Value_df$Compound)) #clean column names from ecxessive strings 
+P_Value_df <- P_Value_df[, c(4, 1, 2, 3)] #reorder columns
+P_Value_df <- P_Value_df[order(P_Value_df$Compound, P_Value_df$Time),] #reorder rows to match Enrichment_df
 rownames(P_Value_df) <- NULL #rename Rows
 
-P_Value_df$Compound <-gsub("\\.|0|1|2|3|4|5|6|7|8|9","",as.character(P_Value_df$Compound))
-P_Value_df <- P_Value_df[, c(4, 1, 2, 3)]
-P_Value_df2 <- P_Value_df[order(P_Value_df$Compound),]
-
-# TILL HERE OK!! ####
-# merge with original df
 
 
-names(P_Value) <- vector_Compound #rename Columns
+##Combining df ####
+Enrichment_df$P_Value <- P_Value_df$P_Value  #Combine df --> add column with P_Values to original table
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#Combining df
-df1 <- df
-df1$Tr_Time <- paste(df1$Tr, df1$Time, sep="_") #Combine names Treatment and Time 
-df2 <- df1[,-(1:2)] #remove Tr & Time
-df3 <- as.data.frame(t(df2)) #reverse original dataframe
-names(df3) <-  unlist(df3[nc.,]) #rename Columns
-df3 <- df3[-nc.,] #remove Row (metabolites)
-df4 <- cbind(df3, (t(P_Value))) #add column with P_Values to original table
-
-
-#P Value filtering 
+##P Value filtering ####
 z <- 0.05 #filtering ratio
-Filtered <- df4[df4$`Time`<z,] #P_Value filtering >z
-Filter <- "Time"
-#OR
-Filtered <- df4[df4$`Tr`<z,] #P_Value filtering >z
-Filter <- "Tr"
-#OR
-Filtered <- df4[df4$`Tr:Time`<z,] #P_Value filtering >z
-Filter <- "TrTime"
+Filtered <- Enrichment_df[Enrichment_df$`P_Value`<z,] #P_Value filtering >z
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Filtered <- Filtered[,1:nr.] #remove columns (samples)
 
