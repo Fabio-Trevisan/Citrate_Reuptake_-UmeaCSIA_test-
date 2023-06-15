@@ -66,20 +66,6 @@ for(i in vector_Compound) {
 
 
 #Summary Table ####
-Summary_table_Relative_abundance <- ddply(df, c("Compound", "Time", "Labeling", "Treatment"), summarise,
-                                          N    = sum(!is.na(Relative_abundance)),
-                                          mean = mean(Relative_abundance, na.rm=TRUE),
-                                          sd   = sd(Relative_abundance, na.rm=TRUE),
-                                          se   = sd / sqrt(N))
-write.table(Summary_table_Relative_abundance, file = "RelAbund_Summary_table.csv", quote = FALSE, sep = ";")
-
-Summary_table_Unlabeled <- ddply(df, c("Compound", "Time", "Labeling", "Treatment"), summarise,
-                                 N    = sum(!is.na(Unlabeled)),
-                                 mean = mean(Unlabeled, na.rm=TRUE),
-                                 sd   = sd(Unlabeled, na.rm=TRUE),
-                                 se   = sd / sqrt(N))
-write.table(Summary_table_Unlabeled, file = "Unlabeled_Summary_table.csv", quote = FALSE, sep = ";")
-
 Summary_table_Labeled <- ddply(df, c("Compound", "Time", "Labeling", "Treatment"), summarise,
                                N    = sum(!is.na(Labeled)),
                                mean = mean(Labeled, na.rm=TRUE),
@@ -87,7 +73,8 @@ Summary_table_Labeled <- ddply(df, c("Compound", "Time", "Labeling", "Treatment"
                                se   = sd / sqrt(N))
 write.table(Summary_table_Labeled, file = "Labeled_Summary_table.csv", quote = FALSE, sep = ";")
 
-
+Enrichment_df <- cast(Summary_table_Labeled, Compound + Time + Treatment ~Labeling, value = "mean") 
+Enrichment_df$Enrichment <- Enrichment_df$L - Enrichment_df$U
 
 #Assumptions ####
 ## 1. Homogeneity of variances
@@ -148,7 +135,9 @@ sink(NULL)
 
 
 
-#T-Test (wilcox.test) of labeled vs UNlabeled!!! ####
+#T-Test (wilcox.test) of labeled vs UNlabeled!!! #### 
+# Wilcoxon Mann Withney U-test or Wilcoxon Rank sum test for INDIPENDENT data
+# not the Wilcoxon sign test for DEPENDENT samples
 #greater
 Wilcox_test_greater <- lapply(vector_Compound, function(m){
   lapply(names(Subset_3[[m]]), function(i){ 
@@ -187,9 +176,6 @@ for(i in vector_Compound) {
 
 
 
-
-
-# TO ADAPT ####
 #P-Value print in original table ####
 #P-Value df preparation
 Wilcox_test_greater_PValue <- lapply(vector_Compound, function(m){
@@ -218,14 +204,64 @@ for(i in vector_Compound) {
 } #rename sub-title (columns) to P-Value
 
 
+
+#Transform list in dataframe
+P_Value <- lapply(vector_Compound, function(m){
+  lapply(names(Wilcox_test_greater[[m]]), function(i){ 
+    do.call(rbind.data.frame, Wilcox_test_greater_PValue[[m]][[i]])
+  })
+}) #merge P-Values for Time
+names(P_Value) <- vector_Compound #add names
+for(i in vector_Compound) {
+  names(P_Value[[i]]) <- vector_Treatment
+} #add names
+
+P_Value_2 <- lapply(vector_Compound, function(m){
+  data.frame(P_Value[[m]])
+}) #merge P-Values for Treatment
+names(P_Value_2) <- vector_Compound #add names
+for(i in vector_Compound) {
+  colnames(P_Value_2[[i]]) <- c("C", "Fe", "P")
+} #rename sub-title (columns) according to Treatment
+
+for(i in vector_Compound) {
+  P_Value_2[[i]]$Time <- rownames(P_Value_2[[i]])
+} #move Time from rownames to column
+
+P_Value_3 <- lapply(vector_Compound, function(m){
+  melt(P_Value_2[[m]], id = "Time", value.name = "Labeled", variable.name = "Treatment")
+}) #melt to bring Treatment from columns to rows
+names(P_Value_3) <- vector_Compound #add names
+
+P_Value_df <- do.call(rbind.data.frame, P_Value_3) #merge all sub-dfs
+P_Value_df$Compound <- rownames(P_Value_df)
+rownames(P_Value_df) <- NULL #rename Rows
+
+P_Value_df$Compound <-gsub("\\.|0|1|2|3|4|5|6|7|8|9","",as.character(P_Value_df$Compound))
+P_Value_df <- P_Value_df[, c(4, 1, 2, 3)]
+P_Value_df2 <- P_Value_df[order(P_Value_df$Compound),]
+
 # TILL HERE OK!! ####
-# LIST WITH P VALUES --> 
-# MUST BE CONVERTED TO DATAFRAME 
-# RE-ARRANGING VARIBLES --> Time, Treatment, Compound 
 # merge with original df
 
-P_Value <- data.frame(Wilcox_test_greater_PValue) #transform list in dataframe
+
 names(P_Value) <- vector_Compound #rename Columns
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #Combining df
@@ -260,3 +296,22 @@ Clean_df <- Clean_df[!str_detect(names(Clean_df), "Blank")]
 
 #save
 write.csv(Clean_df, file = paste("Exudates_Significant", Filter, ".csv", sep="_"), row.names=FALSE)
+
+
+
+
+
+#summary other variables
+Summary_table_Relative_abundance <- ddply(df, c("Compound", "Time", "Labeling", "Treatment"), summarise,
+                                          N    = sum(!is.na(Relative_abundance)),
+                                          mean = mean(Relative_abundance, na.rm=TRUE),
+                                          sd   = sd(Relative_abundance, na.rm=TRUE),
+                                          se   = sd / sqrt(N))
+write.table(Summary_table_Relative_abundance, file = "RelAbund_Summary_table.csv", quote = FALSE, sep = ";")
+
+Summary_table_Unlabeled <- ddply(df, c("Compound", "Time", "Labeling", "Treatment"), summarise,
+                                 N    = sum(!is.na(Unlabeled)),
+                                 mean = mean(Unlabeled, na.rm=TRUE),
+                                 sd   = sd(Unlabeled, na.rm=TRUE),
+                                 se   = sd / sqrt(N))
+write.table(Summary_table_Unlabeled, file = "Unlabeled_Summary_table.csv", quote = FALSE, sep = ";")
