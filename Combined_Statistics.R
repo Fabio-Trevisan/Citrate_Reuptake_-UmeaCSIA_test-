@@ -113,7 +113,7 @@ Levene_test_Labeled
 sink(NULL)
 
 ##2. Normality
-##Shapiro-Wilk test for all single Trs
+##Shapiro-Wilk test for all single Treatments
 SW_test_RelAbund <- df %>%
   group_by(Labeling, Time, Treatment, Compound) %>%
   shapiro_test(Relative_abundance)
@@ -267,9 +267,32 @@ write.csv(Filtered, file = "AA_Significant_Enrichment.csv", row.names=FALSE)
 
 
 
+# Correlation ####
+CorrPlots <- ggscatter(df, x = "Labeled", y = "Relative_abundance", color = "Labeling", 
+          add = "reg.line", conf.int = TRUE, 
+          cor.coef = TRUE, cor.method = "spearman",
+          xlab = "Labeling %", ylab = "Relative_abundance") +
+  facet_wrap(~Compound, scales="free")
+
+ggscatter(df, x = "Labeled", y = "Relative_abundance", 
+                       add = "reg.line", conf.int = TRUE, 
+                       cor.coef = TRUE, cor.method = "spearman",
+                       xlab = "Labeling %", ylab = "Relative_abundance") +
+  facet_wrap(~Compound + Labeling, scales="free")
+ggsave(filename = "Correlation-matrix_RelAbund-Labeled.pdf", plot = last_plot(), dpi = 600, units = "cm", width = 100, height = 70, scale = 0.5)
 
 
-#summary other variables ()
+#res <- lapply(vector_Compound, function(m){
+  lapply(names(Subset_3[[m]]), function(i){ 
+    lapply(names(Subset_3[[m]][[i]]), function(n){ 
+      cor.test(Subset_3[[m]][[i]][[n]], method = "spearman")
+    })
+  })
+})
+res <- cor.test(df$Relative_abundance, df$Labeled, method = "pearson")
+
+
+#summary other variables () ####
 Summary_table_Relative_abundance <- ddply(df, c("Compound", "Time", "Labeling", "Treatment"), summarise,
                                           N    = sum(!is.na(Relative_abundance)),
                                           mean = mean(Relative_abundance, na.rm=TRUE),
