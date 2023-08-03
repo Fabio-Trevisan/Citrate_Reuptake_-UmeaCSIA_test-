@@ -8,30 +8,35 @@ library(purrr)
 library(agricolae)
 library(reshape2)
 
-#Exudates times statistics ####
 
-#REPLICATE RESULTS USING UNLABELED AS DATA VARIABLE (95% INSTEAD OF 5%) AND CHECK RELIABILITY OF RESULTS
 #CHECK CORRELATION BETWEEN [C] & ENRICHMENT% AND RELATIVE ABUNDANCE & ENRICHMENT%
 #RUN 2-WAY, 1-WAY ANOVA AND POST HOC TEST ON TREATMENT AND TIME OF SIGNIFICANT MOLECULES
 
 #Read CSV ####
-df <- read.csv("DATA enrichment.csv", sep=";",
+table <- read.csv("20230711 3-NPH acids from in-house script_IsoCor_res.csv", sep=";",
                   header=T)
-df <- df[,-c(2,3)]
+
+#Dataset preparation ####
+#cleaning
+df <- table[,-c(3,5:9)] #remove un-useful columns
+df <- df[df$isotopologue<=0,] #filter only isotopologue M+0
+df <- df[!str_detect(df$sample, "blank"),] #remove blank samples
+df <- df[!str_detect(df$sample, "std"),] #remove standards
+df <- df[!str_detect(df$sample, "QC"),] #remove QCs
+
+#Time-Treatment-Labeling 
 
 
-#Dataset Uniformation ####
-df$Compound <- factor(df$Compound)
-df$Time <- factor(df$Time)
-df$Labeling <- factor(df$Labeling)
-df$Treatment <- factor(df$Treatment)
 
-vector_Compound <- levels(factor(df$Compound))
+
+#Uniformation and vectors creation
+df$metabolite <- factor(df$metabolite)
+
+vector_metabolite <- levels(factor(df$metabolite))
 vector_Treatment <- levels(factor(df$Treatment))
 vector_Time <- levels(factor(df$Time))
 
-#USED LABELED VALUES FOR TEST!!! (% OF 13C labelled)
-#create Subset according to Compound - Treatment - Time ####
+##Subset according to Compound - Treatment - Time ####
 #Compound
 Subset <- lapply(vector_Compound, function(i){ 
   i <- subset(df, Compound == i)
