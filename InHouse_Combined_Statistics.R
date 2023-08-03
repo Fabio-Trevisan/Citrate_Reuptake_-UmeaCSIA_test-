@@ -45,8 +45,10 @@ vector_Treatment <- levels(factor(df$Treatment))
 vector_Time <- levels(factor(df$Time))
 vector_Labeling <- levels(factor(df$Labeling)) #write vectors for subseting
 
-
-#raplace meanenrichment 0 values with 1/10 ot 1/100 of min values
+#Replace 0
+df["mean_enrichment"][df["mean_enrichment"]==0] <- NA #raplace meanenrichment 0 values with 1/10 ot 1/100 of min values
+x <- min(df$mean_enrichment, na.rm = T)/10
+df[is.na(df)] <- x #raplace meanenrichment 0 values with 1/10 ot 1/100 of min values
 
 
 ##Subset according to metabolite - Treatment - Time ####
@@ -133,11 +135,11 @@ write.table(SW_test_Labeled, file = paste("InHouse_", Class, "_ShapiroWilk_test_
 #3way ANOVA ####
 ##Multiple metabolite Labeled
 ThreeWay_Anova <- lapply(split(df, df$metabolite), function(i){
-  anova(lm(Labeled ~ Labeling * Treatment * Time, data = i))
+  anova(lm(mean_enrichment ~ Labeling * Treatment * Time, data = i))
 })
-write.table(ThreeWay_Anova, file = "ThreeWay_Anova_.csv", quote = FALSE, sep = ";")
+write.table(ThreeWay_Anova, file = paste("InHouse_", Class, "_ThreeWay_Anova.csv", sep=""), quote = FALSE, sep = ";")
 
-sink("ThreeWay_Anova_2.0_.csv")
+sink(paste("InHouse_", Class, "_ThreeWay_Anova_2.0.csv", sep=""))
 ThreeWay_Anova
 sink(NULL)
 
@@ -154,7 +156,7 @@ TO BE DONE
 Wilcox_test_greater <- lapply(vector_metabolite, function(m){
   lapply(names(Subset_3[[m]]), function(i){ 
     lapply(names(Subset_3[[m]][[i]]), function(n){ 
-    wilcox.test(Labeled ~ Labeling, data = Subset_3[[m]][[i]][[n]], alternative = "greater")
+    wilcox.test(mean_enrichment ~ Labeling, data = Subset_3[[m]][[i]][[n]], alternative = "greater")
     })
   })
 })
@@ -172,7 +174,7 @@ for(i in vector_metabolite) {
 Wilcox_test_less <- lapply(vector_metabolite, function(m){
   lapply(names(Subset_3[[m]]), function(i){ 
     lapply(names(Subset_3[[m]][[i]]), function(n){ 
-      wilcox.test(Labeled ~ Labeling, data = Subset_3[[m]][[i]][[n]], alternative = "less")
+      wilcox.test(mean_enrichment ~ Labeling, data = Subset_3[[m]][[i]][[n]], alternative = "less")
     })
   })
 })
@@ -250,6 +252,7 @@ P_Value_df$metabolite <- rownames(P_Value_df) #move row nnames to column
 
 P_Value_df$metabolite <-gsub("\\.|0|1|2|3|4|5|6|7|8|9","",as.character(P_Value_df$metabolite)) #clean column names from ecxessive strings 
 P_Value_df <- P_Value_df[, c(4, 1, 2, 3)] #reorder columns
+P_Value_df$Time <- as.integer(P_Value_df$Time)
 P_Value_df <- P_Value_df[order(P_Value_df$metabolite, P_Value_df$Time),] #reorder rows to match Enrichment_df
 rownames(P_Value_df) <- NULL #rename Rows
 
@@ -263,23 +266,4 @@ z <- 0.05 #filtering ratio
 Filtered <- Enrichment_df[Enrichment_df$`P_Value`<z,] #P_Value filtering >z
 
 #save
-write.csv(Filtered, file = "AA_Significant_Enrichment.csv", row.names=FALSE)
-
-
-
-
-
-#summary other variables () ####
-Summary_table_Relative_abundance <- ddply(df, c("metabolite", "Time", "Labeling", "Treatment"), summarise,
-                                          N    = sum(!is.na(Relative_abundance)),
-                                          mean = mean(Relative_abundance, na.rm=TRUE),
-                                          sd   = sd(Relative_abundance, na.rm=TRUE),
-                                          se   = sd / sqrt(N))
-write.table(Summary_table_Relative_abundance, file = "RelAbund_Summary_table.csv", quote = FALSE, sep = ";")
-
-Summary_table_Unlabeled <- ddply(df, c("metabolite", "Time", "Labeling", "Treatment"), summarise,
-                                 N    = sum(!is.na(Unlabeled)),
-                                 mean = mean(Unlabeled, na.rm=TRUE),
-                                 sd   = sd(Unlabeled, na.rm=TRUE),
-                                 se   = sd / sqrt(N))
-write.table(Summary_table_Unlabeled, file = "Unlabeled_Summary_table.csv", quote = FALSE, sep = ";")
+write.table(Filtered, file = paste("InHouse_", Class, "_Significant_Enrichment.csv", sep=""), row.names=FALSE, sep = ";")
