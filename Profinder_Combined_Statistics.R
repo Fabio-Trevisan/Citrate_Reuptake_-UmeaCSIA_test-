@@ -8,7 +8,7 @@ library(purrr)
 library(agricolae)
 library(reshape2)
 
-#Exudates times statistics ####
+#Profinder (Agilent) software CSIA statistics for AmminoAcids ####
 
 #REPLICATE RESULTS USING UNLABELED AS DATA VARIABLE (95% INSTEAD OF 5%) AND CHECK RELIABILITY OF RESULTS
 #CHECK CORRELATION BETWEEN [C] & ENRICHMENT% AND RELATIVE ABUNDANCE & ENRICHMENT%
