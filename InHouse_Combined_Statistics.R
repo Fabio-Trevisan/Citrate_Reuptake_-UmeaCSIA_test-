@@ -9,6 +9,7 @@ library(agricolae)
 library(reshape2)
 
 #RUN 2-WAY, 1-WAY ANOVA AND POST HOC TEST ON TREATMENT AND TIME OF SIGNIFICANT MOLECULES
+# --> read_tsv() INSTEAD
 
 #OA
 #Read CSV ####
