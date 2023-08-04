@@ -17,6 +17,11 @@ library(reshape2)
 table <- read.csv("20230711 3-NPH acids from in-house script_IsoCor_res.csv", sep=";", header=T)
 Class <- "OA"
 
+#AA
+#Read CSV ####
+table <- read.csv("20230714_AccQ-Tag_AA_peak areas_inhouse_script 2.0_IsoCor_res.csv", sep=";", header=T)
+Class <- "AA"
+
 #Dataset preparation ####
 #cleaning
 df <- table[,-c(3,5:9)] #remove un-useful columns
@@ -29,7 +34,7 @@ df <- df[,-3] #remove un-useful columns
 
 
 #Time-Treatment-Labeling 
-Treatment_factors <- read.csv("Treatment_factors_OA.csv", sep=";", header=T) #load file with treatment_factors
+Treatment_factors <- read.csv(paste("Treatment_factors_", Class, ".csv", sep=""), sep=";", header=T) #load file with treatment_factors
 df$Treatment <- Treatment_factors$Treatment
 df$Time <- Treatment_factors$Time
 df$Labeling <- Treatment_factors$Labeling #add them to df
@@ -48,7 +53,7 @@ vector_Labeling <- levels(factor(df$Labeling)) #write vectors for subseting
 #Replace 0
 df["mean_enrichment"][df["mean_enrichment"]==0] <- NA #raplace meanenrichment 0 values with 1/10 ot 1/100 of min values
 x <- min(df$mean_enrichment, na.rm = T)/10
-df[is.na(df)] <- x #raplace meanenrichment 0 values with 1/10 ot 1/100 of min values
+df[is.na(df)] <- x #raplace meanenrichment 0 values with 1/10 of min values
 
 
 ##Subset according to metabolite - Treatment - Time ####
@@ -121,7 +126,8 @@ Levene_test
 sink(NULL)
 
 ##2. Normality
-##Shapiro-Wilk test for all single Treatments
+##Shapiro-Wilk test for all single Treatments 
+#--> Randomized null values to work (NOT important since data are not homogenous, hence rank test anyway)
 SW_test_Labeled <- df %>%
   group_by(Labeling, Time, Treatment, metabolite) %>%
   shapiro_test(mean_enrichment)
@@ -143,13 +149,9 @@ sink(paste("InHouse_", Class, "_ThreeWay_Anova_2.0.csv", sep=""))
 ThreeWay_Anova
 sink(NULL)
 
-#1way ANOVA ####
-#Treatment and Time statistics####
-TO BE DONE
 
 
-
-#T-Test (wilcox.test) of labeled vs UNlabeled!!! #### 
+#T-Test (wilcox.test) #### 
 # Wilcoxon Mann Withney U-test or Wilcoxon Rank sum test for INDIPENDENT data
 # not the Wilcoxon sign test for DEPENDENT samples
 #greater --> for testing L > U (REAL HYPOTHESIS)
@@ -171,20 +173,20 @@ for(i in vector_metabolite) {
 } #add names
 
 #less --> for testing U > L 
-Wilcox_test_less <- lapply(vector_metabolite, function(m){
+Wilcox_test_smaller <- lapply(vector_metabolite, function(m){
   lapply(names(Subset_3[[m]]), function(i){ 
     lapply(names(Subset_3[[m]][[i]]), function(n){ 
       wilcox.test(mean_enrichment ~ Labeling, data = Subset_3[[m]][[i]][[n]], alternative = "less")
     })
   })
 })
-names(Wilcox_test_less) <- vector_metabolite
+names(Wilcox_test_smaller) <- vector_metabolite
 for(i in vector_metabolite) {
-  names(Wilcox_test_less[[i]]) <- vector_Treatment
+  names(Wilcox_test_smaller[[i]]) <- vector_Treatment
 } #add names
 for(i in vector_metabolite) {
   for(n in vector_Treatment) {
-    names(Wilcox_test_less[[i]][[n]]) <- vector_Time
+    names(Wilcox_test_smaller[[i]][[n]]) <- vector_Time
   }
 } #add names
 
@@ -253,7 +255,7 @@ P_Value_df$metabolite <- rownames(P_Value_df) #move row nnames to column
 P_Value_df$metabolite <-gsub("\\.|0|1|2|3|4|5|6|7|8|9","",as.character(P_Value_df$metabolite)) #clean column names from ecxessive strings 
 P_Value_df <- P_Value_df[, c(4, 1, 2, 3)] #reorder columns
 P_Value_df$Time <- as.integer(P_Value_df$Time)
-P_Value_df <- P_Value_df[order(P_Value_df$metabolite, P_Value_df$Time),] #reorder rows to match Enrichment_df
+P_Value_df <- P_Value_df[order(P_Value_df$metabolite, P_Value_df$Time),] #re-order rows to match Enrichment_df
 rownames(P_Value_df) <- NULL #rename Rows
 
 
@@ -266,4 +268,12 @@ z <- 0.05 #filtering ratio
 Filtered <- Enrichment_df[Enrichment_df$`P_Value`<z,] #P_Value filtering >z
 
 #save
+write.table(Enrichment_df, file = paste("InHouse_", Class, "_Enrichment.csv", sep=""), row.names=FALSE, sep = ";")
 write.table(Filtered, file = paste("InHouse_", Class, "_Significant_Enrichment.csv", sep=""), row.names=FALSE, sep = ";")
+
+
+
+#1way ANOVA on enrichment ####
+#Treatment and Time statistics####
+
+
