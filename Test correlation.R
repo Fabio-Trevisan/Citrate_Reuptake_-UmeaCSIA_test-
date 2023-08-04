@@ -9,12 +9,9 @@ library(agricolae)
 library(reshape2)
 
 
-
-#REPLICATE RESULTS USING UNLABELED AS DATA VARIABLE (95% INSTEAD OF 5%) AND CHECK RELIABILITY OF RESULTS
 #CHECK CORRELATION BETWEEN [C] & ENRICHMENT% AND RELATIVE ABUNDANCE & ENRICHMENT%
-#RUN 2-WAY, 1-WAY ANOVA AND POST HOC TEST ON TREATMENT AND TIME OF SIGNIFICANT MOLECULES
 
-#Read CSV ####
+
 #OA
 #Read CSV ####
 table <- read.csv("20230711 3-NPH acids from in-house script_IsoCor_res.csv", sep=";", header=T)
@@ -27,13 +24,19 @@ Class <- "AA"
 
 #Dataset preparation ####
 #cleaning
-df <- table[,-c(3,5:9)] #remove un-useful columns
+df <- table[,-c(3,5,7:9)] #remove un-useful columns
 df <- df[df$isotopologue<=0,] #filter only isotopologue M+0
 df <- df[!str_detect(df$sample, "blank"),] #remove blank samples
 df <- df[!str_detect(df$sample, "std"),] #remove standards
 df <- df[!str_detect(df$sample, "QC"),] #remove QCs
 row.names(df) <- NULL
 df <- df[,-3] #remove un-useful columns
+
+#Time-Treatment-Labeling 
+Treatment_factors <- read.csv(paste("Treatment_factors_", Class, ".csv", sep=""), sep=";", header=T) #load file with treatment_factors
+df$Treatment <- Treatment_factors$Treatment
+df$Time <- Treatment_factors$Time
+df$Labeling <- Treatment_factors$Labeling #add them to df
 
 
 #Dataset Uniformation ####
@@ -84,20 +87,55 @@ for(i in vector_metabolite) {
 
 
 
-# Correlation ####
-ggscatter(df, x = "Enrichment", y = "Relative_abundance", 
+# Correlation plots####
+#Time as colour + Treatment as FacetWrap 
+p1 <- ggscatter(df, x = "mean_enrichment", y = "area", 
           color = "Time",
           add = "reg.line", conf.int = TRUE, 
           cor.coef = TRUE, cor.method = "spearman",
-          xlab = "Labeling %", ylab = "Relative_abundance") +
-  scale_color_manual(values=c("darkblue","grey77","skyblue3", "blue")) +
-  scale_fill_manual(values=c("darkblue","grey77","skyblue3", "blue")) +
+          xlab = "Enrichment %", ylab = "Relative_abundance") +
+  scale_color_manual(values=c("grey77","skyblue3", "blue", "darkblue")) +
+  scale_fill_manual(values=c("grey77","skyblue3", "blue", "darkblue")) +
   facet_wrap(~metabolite + Treatment, scales="free")
+p1
 
-ggsave(filename = "Corr-matrix_RelAbund_vs_Labeled_(Time).pdf", plot = last_plot(), dpi = 600, units = "cm", width = 150, height = 110, scale = 0.5)
+ggsave(filename = paste("InHouse_", Class, "_Corr-matrix_(Time).pdf", sep=""), plot = last_plot(), dpi = 600, units = "cm", width = 150, height = 110, scale = 0.5)
+
+#Treatment as colour + Time as FacetWrap 
+p2 <- ggscatter(df, x = "mean_enrichment", y = "area", 
+               color = "Treatment",
+               add = "reg.line", conf.int = TRUE, 
+               cor.coef = TRUE, cor.method = "spearman",
+               xlab = "Enrichment %", ylab = "Relative_abundance") +
+  scale_color_manual(values=c("grey77","orange", "blue")) +
+  scale_fill_manual(values=c("grey77","orange", "blue")) +
+  facet_wrap(~metabolite + Time, scales="free")
+p2
+
+ggsave(filename = paste("InHouse_", Class, "_Corr-matrix_(Treatment).pdf", sep=""), plot = last_plot(), dpi = 600, units = "cm", width = 150, height = 110, scale = 0.5)
+
+#Metabolites as FacetWrap 
+p3 <- ggscatter(df, x = "mean_enrichment", y = "area", 
+               add = "reg.line", conf.int = TRUE, 
+               cor.coef = TRUE, cor.method = "spearman",
+               xlab = "Enrichment %", ylab = "Relative_abundance") +
+  facet_wrap(~metabolite, scales="free")
+p3
+
+ggsave(filename = paste("InHouse_", Class, "_Corr-matrix.pdf", sep=""), plot = last_plot(), dpi = 600, units = "cm", width = 150, height = 110, scale = 0.5)
+
+#All together
+p4 <- ggscatter(df, x = "mean_enrichment", y = "area", 
+                add = "reg.line", conf.int = TRUE, 
+                cor.coef = TRUE, cor.method = "spearman",
+                xlab = "Enrichment %", ylab = "Relative_abundance")
+p4
+
+ggsave(filename = paste("InHouse_", Class, "_Correlation.pdf", sep=""), plot = last_plot(), dpi = 600, units = "cm", width = 75, height = 55, scale = 0.3)
 
 
 
+#Correlation statistic test ####
 #NOT WORKING YET (use different subsets)
 res <- lapply(vector_metabolite, function(m){
   lapply(names(Subset_3[[m]]), function(i){ 
