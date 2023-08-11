@@ -2,6 +2,7 @@ library(dplyr)
 library(scales)
 library(tidyr)
 library(stringr)
+library(reshape2)
 
 
 #AA
@@ -18,7 +19,6 @@ Class <- "OA"
 
 
 
-#Both OA and AA
 df <- df[-1,]
 df <- data.frame(t(df)) #reverse dataframe 
 names(df) <- t(df[1,]) #rename columns
@@ -32,7 +32,6 @@ df <- df[!str_detect(names(df), "QC")]
 # Sample/Blank ratio filtering ####
 Blank_filtering <- df
 
-#Only OA
 y = 3 #blank to sample ratio for filtering
 Blank_filtering$Blank <- pmax(Blank_filtering$`010_blank_50% MeOH.cdf`, 
                               Blank_filtering$`011_extraction blank.cdf`) * y #create column with LOD
@@ -46,7 +45,7 @@ names(Blank_filtering) <- vector_samples
 row.names(Blank_filtering) <- row.names(df) #rename cols and rows of new df
 
 
-#Both OA and AA till end
+
 #clening ratios and means from dataset
 Blank_filtering <- Blank_filtering[!str_detect(names(Blank_filtering), "lank")]
 df1 <- Blank_filtering[!str_detect(names(Blank_filtering), "std")]

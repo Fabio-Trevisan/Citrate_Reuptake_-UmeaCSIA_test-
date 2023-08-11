@@ -290,7 +290,7 @@ Glutamate	AccQ	5	019_A2.cdf	0
 Ornithine	2AccQ	0	019_A2.cdf	11308.8978692138
 Ornithine	2AccQ	1	019_A2.cdf	4620.4628949302
 Ornithine	2AccQ	2	019_A2.cdf	662.946362968406
-Ornithine	2AccQ	3	019_A2.cdf	47.9867744305658
+Ornithine	2AccQ	3	019_A2.cdf	0
 Ornithine	2AccQ	4	019_A2.cdf	0
 Ornithine	2AccQ	5	019_A2.cdf	0
 Alanine	AccQ	0	020_A3.cdf	874646.133700896
@@ -584,7 +584,7 @@ Glutamate	AccQ	5	021_A4.cdf	0
 Ornithine	2AccQ	0	021_A4.cdf	6808.22049131216
 Ornithine	2AccQ	1	021_A4.cdf	3229.6704613541
 Ornithine	2AccQ	2	021_A4.cdf	586.045536249251
-Ornithine	2AccQ	3	021_A4.cdf	20.4254044337927
+Ornithine	2AccQ	3	021_A4.cdf	0
 Ornithine	2AccQ	4	021_A4.cdf	0
 Ornithine	2AccQ	5	021_A4.cdf	0
 Alanine	AccQ	0	022_A5.cdf	2804559.27749361
@@ -774,7 +774,7 @@ Glycine	AccQ	2	023_A6.cdf	6604.82005141388
 Histidine	AccQ	0	023_A6.cdf	142530.59125964
 Histidine	AccQ	1	023_A6.cdf	32198.9138817481
 Histidine	AccQ	2	023_A6.cdf	4037.06940874036
-Histidine	AccQ	3	023_A6.cdf	78.0526992287918
+Histidine	AccQ	3	023_A6.cdf	0
 Histidine	AccQ	4	023_A6.cdf	0
 Histidine	AccQ	5	023_A6.cdf	0
 Histidine	AccQ	6	023_A6.cdf	0
@@ -1613,7 +1613,7 @@ Glutamate	AccQ	5	029_A11.cdf	0
 Ornithine	2AccQ	0	029_A11.cdf	4839.35211267606
 Ornithine	2AccQ	1	029_A11.cdf	2024.98591549296
 Ornithine	2AccQ	2	029_A11.cdf	314.950704225352
-Ornithine	2AccQ	3	029_A11.cdf	38.5
+Ornithine	2AccQ	3	029_A11.cdf	0
 Ornithine	2AccQ	4	029_A11.cdf	0
 Ornithine	2AccQ	5	029_A11.cdf	0
 Alanine	AccQ	0	030_A12.cdf	103423.616287095
@@ -1907,7 +1907,7 @@ Glutamate	AccQ	5	031_A13.cdf	0
 Ornithine	2AccQ	0	031_A13.cdf	11400.2083333333
 Ornithine	2AccQ	1	031_A13.cdf	3625.22095959596
 Ornithine	2AccQ	2	031_A13.cdf	539.438131313131
-Ornithine	2AccQ	3	031_A13.cdf	41.5214646464647
+Ornithine	2AccQ	3	031_A13.cdf	0
 Ornithine	2AccQ	4	031_A13.cdf	0
 Ornithine	2AccQ	5	031_A13.cdf	0
 Alanine	AccQ	0	032_A14.cdf	597132.955465587
@@ -2348,7 +2348,7 @@ Glutamate	AccQ	5	034_A17.cdf	0
 Ornithine	2AccQ	0	034_A17.cdf	18492.6449511401
 Ornithine	2AccQ	1	034_A17.cdf	6566.76221498371
 Ornithine	2AccQ	2	034_A17.cdf	1239.95439739414
-Ornithine	2AccQ	3	034_A17.cdf	15.3159609120521
+Ornithine	2AccQ	3	034_A17.cdf	0
 Ornithine	2AccQ	4	034_A17.cdf	0
 Ornithine	2AccQ	5	034_A17.cdf	0
 Alanine	AccQ	0	035_A18.cdf	459549.541227526
@@ -2832,7 +2832,7 @@ Glycine	AccQ	2	039_A21.cdf	13623.3226427197
 Histidine	AccQ	0	039_A21.cdf	184908.415651058
 Histidine	AccQ	1	039_A21.cdf	41908.9095574086
 Histidine	AccQ	2	039_A21.cdf	4970.35920461834
-Histidine	AccQ	3	039_A21.cdf	80.8017960230917
+Histidine	AccQ	3	039_A21.cdf	0
 Histidine	AccQ	4	039_A21.cdf	0
 Histidine	AccQ	5	039_A21.cdf	0
 Histidine	AccQ	6	039_A21.cdf	0
@@ -3476,7 +3476,7 @@ Proline	AccQ	5	043_A25.cdf	0
 Serine	AccQ	0	043_A25.cdf	535024.515927545
 Serine	AccQ	1	043_A25.cdf	100518.244846971
 Serine	AccQ	2	043_A25.cdf	12722.698313554
-Serine	AccQ	3	043_A25.cdf	79.7688944409744
+Serine	AccQ	3	043_A25.cdf	0
 Threonine	AccQ	0	043_A25.cdf	2913577.88257339
 Threonine	AccQ	1	043_A25.cdf	596205.103060587
 Threonine	AccQ	2	043_A25.cdf	89080.0936914428
@@ -3770,7 +3770,7 @@ Proline	AccQ	5	045_A27.cdf	0
 Serine	AccQ	0	045_A27.cdf	542090.57486631
 Serine	AccQ	1	045_A27.cdf	94284.2312834225
 Serine	AccQ	2	045_A27.cdf	13468.2018716578
-Serine	AccQ	3	045_A27.cdf	115.307486631016
+Serine	AccQ	3	045_A27.cdf	0
 Threonine	AccQ	0	045_A27.cdf	2945061.51737968
 Threonine	AccQ	1	045_A27.cdf	588267.346256685
 Threonine	AccQ	2	045_A27.cdf	94592.4732620321
@@ -5435,7 +5435,7 @@ Glutamate	AccQ	5	057_A38.cdf	0
 Ornithine	2AccQ	0	057_A38.cdf	6467.33638743456
 Ornithine	2AccQ	1	057_A38.cdf	2569.0445026178
 Ornithine	2AccQ	2	057_A38.cdf	684.40445026178
-Ornithine	2AccQ	3	057_A38.cdf	40.5955497382199
+Ornithine	2AccQ	3	057_A38.cdf	0
 Ornithine	2AccQ	4	057_A38.cdf	0
 Ornithine	2AccQ	5	057_A38.cdf	0
 Alanine	AccQ	0	058_A39.cdf	690541.466753585
@@ -6170,7 +6170,7 @@ Glutamate	AccQ	5	063_A43.cdf	0
 Ornithine	2AccQ	0	063_A43.cdf	7054.1203974284
 Ornithine	2AccQ	1	063_A43.cdf	3108.10637054354
 Ornithine	2AccQ	2	063_A43.cdf	263.909994155465
-Ornithine	2AccQ	3	063_A43.cdf	12.2326125073057
+Ornithine	2AccQ	3	063_A43.cdf	0
 Ornithine	2AccQ	4	063_A43.cdf	0
 Ornithine	2AccQ	5	063_A43.cdf	0
 Alanine	AccQ	0	064_A44.cdf	518260.743801653
@@ -7199,7 +7199,7 @@ Glutamate	AccQ	5	070_A50.cdf	0
 Ornithine	2AccQ	0	070_A50.cdf	7425.29255319149
 Ornithine	2AccQ	1	070_A50.cdf	2649.36835106383
 Ornithine	2AccQ	2	070_A50.cdf	639.827127659575
-Ornithine	2AccQ	3	070_A50.cdf	14.4547872340426
+Ornithine	2AccQ	3	070_A50.cdf	0
 Ornithine	2AccQ	4	070_A50.cdf	0
 Ornithine	2AccQ	5	070_A50.cdf	0
 Alanine	AccQ	0	072_A51.cdf	938684.519637462
@@ -7739,7 +7739,7 @@ Proline	AccQ	5	075_A54.cdf	0
 Serine	AccQ	0	075_A54.cdf	506003.483443709
 Serine	AccQ	1	075_A54.cdf	92678.3907284768
 Serine	AccQ	2	075_A54.cdf	11627.7483443709
-Serine	AccQ	3	075_A54.cdf	25.6225165562914
+Serine	AccQ	3	075_A54.cdf	0
 Threonine	AccQ	0	075_A54.cdf	2967242.57615894
 Threonine	AccQ	1	075_A54.cdf	608290.701986755
 Threonine	AccQ	2	075_A54.cdf	91226.0529801324
@@ -7977,7 +7977,7 @@ Glycine	AccQ	2	077_A56.cdf	7447.1534320323
 Histidine	AccQ	0	077_A56.cdf	172776.339165545
 Histidine	AccQ	1	077_A56.cdf	39160.2489905787
 Histidine	AccQ	2	077_A56.cdf	5128.25033647376
-Histidine	AccQ	3	077_A56.cdf	82.1197846567968
+Histidine	AccQ	3	077_A56.cdf	0
 Histidine	AccQ	4	077_A56.cdf	0
 Histidine	AccQ	5	077_A56.cdf	0
 Histidine	AccQ	6	077_A56.cdf	0
@@ -8963,7 +8963,7 @@ Glutamate	AccQ	5	084_A62.cdf	0
 Ornithine	2AccQ	0	084_A62.cdf	8538.56870229007
 Ornithine	2AccQ	1	084_A62.cdf	3309.11577608142
 Ornithine	2AccQ	2	084_A62.cdf	375.235368956743
-Ornithine	2AccQ	3	084_A62.cdf	27.7862595419847
+Ornithine	2AccQ	3	084_A62.cdf	0
 Ornithine	2AccQ	4	084_A62.cdf	0
 Ornithine	2AccQ	5	084_A62.cdf	0
 Alanine	AccQ	0	085_A63.cdf	448149.717444717
@@ -9110,7 +9110,7 @@ Glutamate	AccQ	5	085_A63.cdf	0
 Ornithine	2AccQ	0	085_A63.cdf	6160.16584766585
 Ornithine	2AccQ	1	085_A63.cdf	2201.0257985258
 Ornithine	2AccQ	2	085_A63.cdf	174.68058968059
-Ornithine	2AccQ	3	085_A63.cdf	37.039312039312
+Ornithine	2AccQ	3	085_A63.cdf	0
 Ornithine	2AccQ	4	085_A63.cdf	0
 Ornithine	2AccQ	5	085_A63.cdf	0
 Alanine	AccQ	0	086_A64.cdf	1076470.35602748
@@ -9404,7 +9404,7 @@ Glutamate	AccQ	5	087_A65.cdf	0
 Ornithine	2AccQ	0	087_A65.cdf	8591.52744630072
 Ornithine	2AccQ	1	087_A65.cdf	2821.77207637232
 Ornithine	2AccQ	2	087_A65.cdf	496.992840095465
-Ornithine	2AccQ	3	087_A65.cdf	36.0202863961814
+Ornithine	2AccQ	3	087_A65.cdf	0
 Ornithine	2AccQ	4	087_A65.cdf	0
 Ornithine	2AccQ	5	087_A65.cdf	0
 Alanine	AccQ	0	088_A66.cdf	814153.286713287
@@ -11315,7 +11315,7 @@ Glutamate	AccQ	5	101_A78.cdf	0
 Ornithine	2AccQ	0	101_A78.cdf	7784.91214667685
 Ornithine	2AccQ	1	101_A78.cdf	2760.24446142093
 Ornithine	2AccQ	2	101_A78.cdf	604.392666157372
-Ornithine	2AccQ	3	101_A78.cdf	33.3689839572192
+Ornithine	2AccQ	3	101_A78.cdf	0
 Ornithine	2AccQ	4	101_A78.cdf	0
 Ornithine	2AccQ	5	101_A78.cdf	0
 Alanine	AccQ	0	102_A79.cdf	511310.121019108
@@ -11462,7 +11462,7 @@ Glutamate	AccQ	5	102_A79.cdf	0
 Ornithine	2AccQ	0	102_A79.cdf	10358.1656050955
 Ornithine	2AccQ	1	102_A79.cdf	3718.66878980892
 Ornithine	2AccQ	2	102_A79.cdf	1225
-Ornithine	2AccQ	3	102_A79.cdf	32.6496815286624
+Ornithine	2AccQ	3	102_A79.cdf	0
 Ornithine	2AccQ	4	102_A79.cdf	0
 Ornithine	2AccQ	5	102_A79.cdf	0
 Alanine	AccQ	0	103_A80.cdf	577949.492063492
@@ -11609,7 +11609,7 @@ Glutamate	AccQ	5	103_A80.cdf	0
 Ornithine	2AccQ	0	103_A80.cdf	7887.82857142857
 Ornithine	2AccQ	1	103_A80.cdf	2784.89523809524
 Ornithine	2AccQ	2	103_A80.cdf	587.219047619048
-Ornithine	2AccQ	3	103_A80.cdf	13.9936507936508
+Ornithine	2AccQ	3	103_A80.cdf	0
 Ornithine	2AccQ	4	103_A80.cdf	0
 Ornithine	2AccQ	5	103_A80.cdf	0
 Alanine	AccQ	0	105_A81.cdf	696793.449965011
@@ -11652,7 +11652,7 @@ Glycine	AccQ	2	105_A81.cdf	6006.28411476557
 Histidine	AccQ	0	105_A81.cdf	157886.396081176
 Histidine	AccQ	1	105_A81.cdf	35492.9461161652
 Histidine	AccQ	2	105_A81.cdf	4353.45696291113
-Histidine	AccQ	3	105_A81.cdf	98.9713086074178
+Histidine	AccQ	3	105_A81.cdf	0
 Histidine	AccQ	4	105_A81.cdf	0
 Histidine	AccQ	5	105_A81.cdf	0
 Histidine	AccQ	6	105_A81.cdf	0
@@ -11708,7 +11708,7 @@ Proline	AccQ	5	105_A81.cdf	0
 Serine	AccQ	0	105_A81.cdf	464314.541637509
 Serine	AccQ	1	105_A81.cdf	86787.277816655
 Serine	AccQ	2	105_A81.cdf	9222.30930720784
-Serine	AccQ	3	105_A81.cdf	39.4681595521344
+Serine	AccQ	3	105_A81.cdf	0
 Threonine	AccQ	0	105_A81.cdf	2707995.03149055
 Threonine	AccQ	1	105_A81.cdf	511335.052484255
 Threonine	AccQ	2	105_A81.cdf	81482.5472358293
@@ -11855,7 +11855,7 @@ Proline	AccQ	5	106_A82.cdf	0
 Serine	AccQ	0	106_A82.cdf	543419.608099282
 Serine	AccQ	1	106_A82.cdf	99563.8536903984
 Serine	AccQ	2	106_A82.cdf	12524.8791639451
-Serine	AccQ	3	106_A82.cdf	110.790333115611
+Serine	AccQ	3	106_A82.cdf	0
 Threonine	AccQ	0	106_A82.cdf	2770207.16525147
 Threonine	AccQ	1	106_A82.cdf	546108.190725016
 Threonine	AccQ	2	106_A82.cdf	85453.0176355323
@@ -12296,7 +12296,7 @@ Proline	AccQ	5	109_A85.cdf	0
 Serine	AccQ	0	109_A85.cdf	464994.829833454
 Serine	AccQ	1	109_A85.cdf	86954.0912382332
 Serine	AccQ	2	109_A85.cdf	9799.22519913106
-Serine	AccQ	3	109_A85.cdf	59.3338160753077
+Serine	AccQ	3	109_A85.cdf	0
 Threonine	AccQ	0	109_A85.cdf	1970922.18682114
 Threonine	AccQ	1	109_A85.cdf	329925.235336713
 Threonine	AccQ	2	109_A85.cdf	52175.6118754526
@@ -12681,7 +12681,7 @@ Glycine	AccQ	2	112_A88.cdf	14497.3965387509
 Histidine	AccQ	0	112_A88.cdf	185961.060948081
 Histidine	AccQ	1	112_A88.cdf	40976.9676448458
 Histidine	AccQ	2	112_A88.cdf	4932.45297215952
-Histidine	AccQ	3	112_A88.cdf	88.0285929270128
+Histidine	AccQ	3	112_A88.cdf	0
 Histidine	AccQ	4	112_A88.cdf	0
 Histidine	AccQ	5	112_A88.cdf	0
 Histidine	AccQ	6	112_A88.cdf	0
@@ -12884,7 +12884,7 @@ Proline	AccQ	5	113_A89.cdf	0
 Serine	AccQ	0	113_A89.cdf	468179.475
 Serine	AccQ	1	113_A89.cdf	86377.3625
 Serine	AccQ	2	113_A89.cdf	10355.75
-Serine	AccQ	3	113_A89.cdf	90.68125
+Serine	AccQ	3	113_A89.cdf	0
 Threonine	AccQ	0	113_A89.cdf	3085082.3375
 Threonine	AccQ	1	113_A89.cdf	675306.45625
 Threonine	AccQ	2	113_A89.cdf	95555.09375
@@ -14108,7 +14108,7 @@ Glutamate	AccQ	5	122_A97.cdf	0
 Ornithine	2AccQ	0	122_A97.cdf	4348
 Ornithine	2AccQ	1	122_A97.cdf	1803.97523219814
 Ornithine	2AccQ	2	122_A97.cdf	378.080495356037
-Ornithine	2AccQ	3	122_A97.cdf	14.4272445820433
+Ornithine	2AccQ	3	122_A97.cdf	0
 Ornithine	2AccQ	4	122_A97.cdf	0
 Ornithine	2AccQ	5	122_A97.cdf	0
 Alanine	AccQ	0	123_A98.cdf	382809.75177305
@@ -14255,7 +14255,7 @@ Glutamate	AccQ	5	123_A98.cdf	0
 Ornithine	2AccQ	0	123_A98.cdf	5370.26004728132
 Ornithine	2AccQ	1	123_A98.cdf	1991.84988179669
 Ornithine	2AccQ	2	123_A98.cdf	440.821513002364
-Ornithine	2AccQ	3	123_A98.cdf	36.1229314420804
+Ornithine	2AccQ	3	123_A98.cdf	0
 Ornithine	2AccQ	4	123_A98.cdf	0
 Ornithine	2AccQ	5	123_A98.cdf	0
 Alanine	AccQ	0	124_A99.cdf	521951.67251462
@@ -15431,7 +15431,7 @@ Glutamate	AccQ	5	132_A106.cdf	0
 Ornithine	2AccQ	0	132_A106.cdf	13490.7503506311
 Ornithine	2AccQ	1	132_A106.cdf	4864.55119214586
 Ornithine	2AccQ	2	132_A106.cdf	1240.1683029453
-Ornithine	2AccQ	3	132_A106.cdf	36.7321178120617
+Ornithine	2AccQ	3	132_A106.cdf	0
 Ornithine	2AccQ	4	132_A106.cdf	0
 Ornithine	2AccQ	5	132_A106.cdf	0
 Alanine	AccQ	0	133_A107.cdf	359173.149210904
@@ -16265,7 +16265,7 @@ Proline	AccQ	5	139_A112.cdf	0
 Serine	AccQ	0	139_A112.cdf	324776.88976378
 Serine	AccQ	1	139_A112.cdf	61217.6115485564
 Serine	AccQ	2	139_A112.cdf	6023.49081364829
-Serine	AccQ	3	139_A112.cdf	47.0341207349081
+Serine	AccQ	3	139_A112.cdf	0
 Threonine	AccQ	0	139_A112.cdf	3092807.42782152
 Threonine	AccQ	1	139_A112.cdf	649012.086614173
 Threonine	AccQ	2	139_A112.cdf	97086.4173228346
@@ -16559,7 +16559,7 @@ Proline	AccQ	5	141_A114.cdf	0
 Serine	AccQ	0	141_A114.cdf	541662.720403023
 Serine	AccQ	1	141_A114.cdf	96183.9105793451
 Serine	AccQ	2	141_A114.cdf	12475.4848866499
-Serine	AccQ	3	141_A114.cdf	73.6272040302267
+Serine	AccQ	3	141_A114.cdf	0
 Threonine	AccQ	0	141_A114.cdf	3175562.94710327
 Threonine	AccQ	1	141_A114.cdf	693287.940806045
 Threonine	AccQ	2	141_A114.cdf	102741.316120907
@@ -16853,7 +16853,7 @@ Proline	AccQ	5	143_A116.cdf	0
 Serine	AccQ	0	143_A116.cdf	375198.478664193
 Serine	AccQ	1	143_A116.cdf	70728.0705009276
 Serine	AccQ	2	143_A116.cdf	7532.10884353741
-Serine	AccQ	3	143_A116.cdf	37.847866419295
+Serine	AccQ	3	143_A116.cdf	0
 Threonine	AccQ	0	143_A116.cdf	3075692.6716141
 Threonine	AccQ	1	143_A116.cdf	685268.169449598
 Threonine	AccQ	2	143_A116.cdf	97757.2912801484
@@ -17000,7 +17000,7 @@ Proline	AccQ	5	144_A117.cdf	0
 Serine	AccQ	0	144_A117.cdf	481413.514615908
 Serine	AccQ	1	144_A117.cdf	85428.354860639
 Serine	AccQ	2	144_A117.cdf	10705.5540448674
-Serine	AccQ	3	144_A117.cdf	36.8252889191027
+Serine	AccQ	3	144_A117.cdf	0
 Threonine	AccQ	0	144_A117.cdf	3320066.11148878
 Threonine	AccQ	1	144_A117.cdf	716708.613188307
 Threonine	AccQ	2	144_A117.cdf	104196.233854521

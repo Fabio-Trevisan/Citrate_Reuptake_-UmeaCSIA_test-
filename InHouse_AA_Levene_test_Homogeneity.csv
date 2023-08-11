@@ -56,7 +56,7 @@ $Histidine
 # A tibble: 1 × 4
     df1   df2 statistic     p
   <int> <int>     <dbl> <dbl>
-1    23    95      1.32 0.179
+1    23    95      1.32 0.178
 
 $Isoleucine
 # A tibble: 1 × 4
@@ -92,7 +92,7 @@ $Ornithine
 # A tibble: 1 × 4
     df1   df2 statistic       p
   <int> <int>     <dbl>   <dbl>
-1    23    95      2.20 0.00428
+1    23    95      2.17 0.00472
 
 $Phenylalanine
 # A tibble: 1 × 4

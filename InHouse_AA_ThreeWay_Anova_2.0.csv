@@ -99,7 +99,7 @@ Analysis of Variance Table
 
 Response: mean_enrichment
                         Df    Sum Sq   Mean Sq  F value    Pr(>F)    
-Labeling                 1 0.0050763 0.0050763 600.7078 < 2.2e-16 ***
+Labeling                 1 0.0050763 0.0050763 600.7077 < 2.2e-16 ***
 Treatment                2 0.0003566 0.0001783  21.0983 2.619e-08 ***
 Time                     3 0.0002491 0.0000830   9.8260 1.047e-05 ***
 Labeling:Treatment       2 0.0000334 0.0000167   1.9749 0.1444346    
@@ -147,14 +147,14 @@ Analysis of Variance Table
 
 Response: mean_enrichment
                         Df     Sum Sq    Mean Sq  F value Pr(>F)    
-Labeling                 1 0.00000038 3.7700e-07   0.2776 0.5995    
-Treatment                2 0.00050072 2.5036e-04 184.2216 <2e-16 ***
-Time                     3 0.00000171 5.7000e-07   0.4197 0.7393    
-Labeling:Treatment       2 0.00000092 4.6000e-07   0.3386 0.7136    
-Labeling:Time            3 0.00000840 2.7990e-06   2.0599 0.1107    
-Treatment:Time           6 0.00000974 1.6230e-06   1.1944 0.3160    
-Labeling:Treatment:Time  6 0.00000700 1.1660e-06   0.8579 0.5289    
-Residuals               95 0.00012911 1.3590e-06                    
+Labeling                 1 0.00000038 3.7700e-07   0.2775 0.5996    
+Treatment                2 0.00050068 2.5034e-04 184.2346 <2e-16 ***
+Time                     3 0.00000171 5.7100e-07   0.4199 0.7391    
+Labeling:Treatment       2 0.00000092 4.6000e-07   0.3388 0.7135    
+Labeling:Time            3 0.00000840 2.8000e-06   2.0605 0.1106    
+Treatment:Time           6 0.00000974 1.6230e-06   1.1942 0.3161    
+Labeling:Treatment:Time  6 0.00000700 1.1660e-06   0.8580 0.5288    
+Residuals               95 0.00012909 1.3590e-06                    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
@@ -230,9 +230,9 @@ Response: mean_enrichment
 Labeling                 1 2.2970e-05 2.2970e-05 11.0784 0.0012438 ** 
 Treatment                2 4.1732e-05 2.0866e-05 10.0636 0.0001086 ***
 Time                     3 7.3110e-06 2.4371e-06  1.1754 0.3232993    
-Labeling:Treatment       2 2.8220e-06 1.4112e-06  0.6806 0.5087599    
+Labeling:Treatment       2 2.8220e-06 1.4112e-06  0.6806 0.5087597    
 Labeling:Time            3 1.2940e-06 4.3130e-07  0.2080 0.8906168    
-Treatment:Time           6 1.8906e-05 3.1511e-06  1.5197 0.1799964    
+Treatment:Time           6 1.8906e-05 3.1511e-06  1.5197 0.1799963    
 Labeling:Treatment:Time  6 2.8139e-05 4.6899e-06  2.2619 0.0438725 *  
 Residuals               95 1.9697e-04 2.0734e-06                      
 ---
@@ -243,14 +243,14 @@ Analysis of Variance Table
 
 Response: mean_enrichment
                         Df    Sum Sq    Mean Sq F value    Pr(>F)    
-Labeling                 1 0.0000002 0.00000016  0.0031  0.955802    
-Treatment                2 0.0060410 0.00302050 56.9620 < 2.2e-16 ***
-Time                     3 0.0000263 0.00000878  0.1655  0.919377    
-Labeling:Treatment       2 0.0000571 0.00002853  0.5380  0.585660    
-Labeling:Time            3 0.0000537 0.00001789  0.3374  0.798285    
-Treatment:Time           6 0.0001859 0.00003098  0.5843  0.742063    
-Labeling:Treatment:Time  6 0.0009656 0.00016093  3.0349  0.009274 ** 
-Residuals               95 0.0050375 0.00005303                      
+Labeling                 1 0.0000004 0.00000036  0.0067  0.934824    
+Treatment                2 0.0060147 0.00300733 56.7107 < 2.2e-16 ***
+Time                     3 0.0000258 0.00000859  0.1621  0.921630    
+Labeling:Treatment       2 0.0000590 0.00002948  0.5560  0.575356    
+Labeling:Time            3 0.0000519 0.00001731  0.3265  0.806207    
+Treatment:Time           6 0.0001830 0.00003050  0.5751  0.749279    
+Labeling:Treatment:Time  6 0.0009680 0.00016134  3.0425  0.009132 ** 
+Residuals               95 0.0050378 0.00005303                      
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
@@ -259,7 +259,7 @@ Analysis of Variance Table
 
 Response: mean_enrichment
                         Df     Sum Sq    Mean Sq F value    Pr(>F)    
-Labeling                 1 4.1000e-08 4.1000e-08  0.0514  0.821050    
+Labeling                 1 4.1000e-08 4.1000e-08  0.0514  0.821051    
 Treatment                2 1.0799e-04 5.3995e-05 67.9262 < 2.2e-16 ***
 Time                     3 1.3237e-05 4.4120e-06  5.5508  0.001489 ** 
 Labeling:Treatment       2 3.5770e-06 1.7880e-06  2.2499  0.110998    
@@ -291,14 +291,14 @@ Analysis of Variance Table
 
 Response: mean_enrichment
                         Df     Sum Sq    Mean Sq F value    Pr(>F)    
-Labeling                 1 7.6440e-06 7.6440e-06  2.4093   0.12394    
-Treatment                2 2.2220e-04 1.1110e-04 35.0172 4.047e-12 ***
-Time                     3 3.4704e-05 1.1568e-05  3.6460   0.01541 *  
-Labeling:Treatment       2 9.4580e-06 4.7290e-06  1.4905   0.23048    
-Labeling:Time            3 1.0562e-05 3.5210e-06  1.1097   0.34916    
-Treatment:Time           6 3.2660e-05 5.4430e-06  1.7157   0.12566    
-Labeling:Treatment:Time  6 2.8163e-05 4.6940e-06  1.4794   0.19349    
-Residuals               95 3.0141e-04 3.1730e-06                      
+Labeling                 1 7.6420e-06 7.6420e-06  2.4088    0.1240    
+Treatment                2 2.2216e-04 1.1108e-04 35.0134 4.055e-12 ***
+Time                     3 3.4704e-05 1.1568e-05  3.6463    0.0154 *  
+Labeling:Treatment       2 9.4600e-06 4.7300e-06  1.4910    0.2304    
+Labeling:Time            3 1.0574e-05 3.5250e-06  1.1111    0.3486    
+Treatment:Time           6 3.2660e-05 5.4430e-06  1.7158    0.1256    
+Labeling:Treatment:Time  6 2.8176e-05 4.6960e-06  1.4802    0.1932    
+Residuals               95 3.0139e-04 3.1730e-06                      
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
@@ -339,12 +339,12 @@ Analysis of Variance Table
 
 Response: mean_enrichment
                         Df     Sum Sq    Mean Sq  F value    Pr(>F)    
-Labeling                 1 0.00000019 1.8900e-07   0.2706 0.6041646    
+Labeling                 1 0.00000019 1.8900e-07   0.2706 0.6041654    
 Treatment                2 0.00034257 1.7129e-04 245.3221 < 2.2e-16 ***
 Time                     3 0.00000801 2.6680e-06   3.8217 0.0123897 *  
-Labeling:Treatment       2 0.00001267 6.3340e-06   9.0711 0.0002481 ***
+Labeling:Treatment       2 0.00001267 6.3340e-06   9.0712 0.0002481 ***
 Labeling:Time            3 0.00000454 1.5130e-06   2.1676 0.0969293 .  
-Treatment:Time           6 0.00000631 1.0510e-06   1.5051 0.1848112    
+Treatment:Time           6 0.00000631 1.0510e-06   1.5051 0.1848114    
 Labeling:Treatment:Time  6 0.00000695 1.1580e-06   1.6584 0.1397606    
 Residuals               95 0.00006633 6.9800e-07                       
 ---

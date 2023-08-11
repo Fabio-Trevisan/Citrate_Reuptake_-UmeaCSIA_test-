@@ -2,43 +2,43 @@ $Aconitate
 # A tibble: 1 × 4
     df1   df2 statistic      p
   <int> <int>     <dbl>  <dbl>
-1    23    93      1.70 0.0400
+1    23    93      1.97 0.0121
 
 $Citrate
 # A tibble: 1 × 4
     df1   df2 statistic             p
   <int> <int>     <dbl>         <dbl>
-1    23    93      5.18 0.00000000556
+1    23    93      5.19 0.00000000544
 
 $Fumarate
 # A tibble: 1 × 4
     df1   df2 statistic     p
   <int> <int>     <dbl> <dbl>
-1    23    93     0.909 0.586
+1    23    93     0.910 0.586
 
 $Glycerate
 # A tibble: 1 × 4
     df1   df2 statistic      p
   <int> <int>     <dbl>  <dbl>
-1    23    93      1.96 0.0130
+1    23    93      1.77 0.0293
 
 $Glycolate
 # A tibble: 1 × 4
     df1   df2 statistic     p
   <int> <int>     <dbl> <dbl>
-1    23    93      1.42 0.122
+1    23    93      1.16 0.305
 
 $Hydroxyglutarate
 # A tibble: 1 × 4
-    df1   df2 statistic       p
-  <int> <int>     <dbl>   <dbl>
-1    23    93      2.10 0.00698
+    df1   df2 statistic      p
+  <int> <int>     <dbl>  <dbl>
+1    23    93      1.58 0.0645
 
 $Isocitrate
 # A tibble: 1 × 4
     df1   df2 statistic      p
   <int> <int>     <dbl>  <dbl>
-1    23    93      1.51 0.0859
+1    23    93      1.56 0.0717
 
 $Itaconate
 # A tibble: 1 × 4
@@ -50,7 +50,7 @@ $Lactate
 # A tibble: 1 × 4
     df1   df2 statistic     p
   <int> <int>     <dbl> <dbl>
-1    23    93     0.968 0.513
+1    23    93     0.967 0.514
 
 $Malate
 # A tibble: 1 × 4
@@ -66,9 +66,9 @@ $Oxalate
 
 $Oxaloacetate
 # A tibble: 1 × 4
-    df1   df2 statistic       p
-  <int> <int>     <dbl>   <dbl>
-1    23    93      2.43 0.00147
+    df1   df2 statistic        p
+  <int> <int>     <dbl>    <dbl>
+1    23    93      2.97 0.000115
 
 $Oxoglutarate
 # A tibble: 1 × 4
@@ -86,5 +86,5 @@ $Succinate
 # A tibble: 1 × 4
     df1   df2 statistic     p
   <int> <int>     <dbl> <dbl>
-1    23    93      1.33 0.170
+1    23    93      1.26 0.215
 

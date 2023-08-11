@@ -9,16 +9,16 @@ library(agricolae)
 library(reshape2)
 
 #RUN 2-WAY, 1-WAY ANOVA AND POST HOC TEST ON TREATMENT AND TIME OF SIGNIFICANT MOLECULES
-# --> read_tsv() INSTEAD
+#OBVIOUSLY re-run whole script with new dataset blank and FW corrected
 
 #OA
 #Read CSV ####
-table <- read.csv("20230711 3-NPH acids from in-house script_IsoCor_res.csv", sep=";", header=T)
+table <- read.csv("20230711 3-NPH acids from in-house script_IsoCor_res.tsv", sep="\t", header=T)
 Class <- "OA"
 
 #AA
 #Read CSV ####
-table <- read.csv("20230714_AccQ-Tag_AA_peak areas_inhouse_script 2.0_IsoCor_res.csv", sep=";", header=T)
+table <- read.csv("20230714_AccQ-Tag_AA_peak areas_inhouse_script 2.0_IsoCor_res.tsv", sep="\t", header=T)
 Class <- "AA"
 
 #Dataset preparation ####
@@ -51,7 +51,7 @@ vector_Labeling <- levels(factor(df$Labeling)) #write vectors for subseting
 
 #Replace 0
 df["mean_enrichment"][df["mean_enrichment"]==0] <- NA #raplace meanenrichment 0 values with 1/10 ot 1/100 of min values
-x <- min(df$mean_enrichment, na.rm = T)/10
+x <- min(df$mean_enrichment, na.rm = T)/10 #calculate min values/10
 df[is.na(df)] <- x #raplace meanenrichment 0 values with 1/10 of min values
 
 
