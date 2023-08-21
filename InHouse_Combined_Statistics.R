@@ -31,7 +31,6 @@ df <- df[!str_detect(df$sample, "QC"),] #remove QCs
 row.names(df) <- NULL
 df <- df[,-3] #remove un-useful columns
 
-
 #Time-Treatment-Labeling 
 Treatment_factors <- read.csv(paste("Treatment_factors_", Class, ".csv", sep=""), sep=";", header=T) #load file with treatment_factors
 df$Treatment <- Treatment_factors$Treatment
