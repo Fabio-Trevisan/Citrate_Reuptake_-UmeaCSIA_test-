@@ -1,5 +1,6 @@
 library(readr)
 library(ggpubr)
+library(ggplot2)
 library(tidyverse)
 library(plyr)
 library(dplyr)
@@ -7,6 +8,7 @@ library(rstatix)
 library(purrr)
 library(agricolae)
 library(reshape2)
+library(scales)
 
 
 #OA
@@ -106,7 +108,7 @@ sink(NULL)
 SW_test_Labeled <- df %>%
   group_by(Labeling, Time, Treatment, metabolite) %>%
   shapiro_test(mean_enrichment)
-write.table(SW_test_Labeled, file = paste("InHouse_", Class, "_ShapiroWilk_test_Normality", sep=""), quote = FALSE, sep = ";")
+write.table(SW_test_Labeled, file = paste("InHouse_", Class, "_ShapiroWilk_test_Normality.csv", sep=""), quote = FALSE, sep = ";")
 
 ##3. Indipendency
 #Data are indepent by experimental design!
@@ -338,3 +340,53 @@ Filtered <- Enrichment_df[Enrichment_df$`P_Value`<z,] #P_Value filtering >z
 ##  Save ####
 write.table(Enrichment_df, file = paste("InHouse_", Class, "_Enrichment.csv", sep=""), row.names=FALSE, sep = ";")
 write.table(Filtered, file = paste("InHouse_", Class, "_Significant_Enrichment.csv", sep=""), row.names=FALSE, sep = ";")
+
+
+
+# Scatterplot ####
+#ALL
+Summary_table_L <- Summary_table %>% filter(str_detect(Labeling, "L"))
+Summary_table_L$Time <- as.character(Summary_table_L$Time)
+Summary_table_L$Time <- as.numeric(Summary_table_L$Time)
+
+f1 <- ggplot(Summary_table_L, aes(x = Time, y = mean, group = Treatment, colour = Treatment)) + 
+  geom_line(aes(group = Treatment)) + 
+  geom_point(aes(shape = Treatment)) + 
+  scale_shape_manual(values = c(15:18)) +
+  scale_color_manual(values=c("grey77", "darkorange2", "skyblue3"))+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se, group = Treatment), width = 0.3) +
+  theme_bw() + 
+  scale_y_continuous(labels = percent) +
+  scale_x_continuous(breaks=seq(0,17,1))
+f2 <- f1 + facet_wrap(~metabolite, scales="fixed") + 
+  ylab("% Enrichment") + 
+  xlab("Time (min)") 
+
+ggsave(filename = paste("InHouse_", Class, "_Scatterplot.pdf", sep=""), plot = f2, dpi = 600, units = "cm", width = 80, height = 80, scale = 0.5)
+
+
+
+#Significant only
+OA_Significant_Molecules <- c("Aconitate", "Citrate", "Hydroxyglutarate", "Isocitrate", "Oxalate", "Oxaloacetate", "Oxoglutarate", "Pyruvate", "Succinate")
+
+AA_Significant_Molecules <- c("Aspartate", "Citrulline", "GABA", "Glutamate", "Glutamine", "")
+#Lysine and Alanine 0.05<P<0.10 
+
+Summary_table_L_Significant <- Summary_table_L %>% filter(str_detect(metabolite, paste(Class, "Significant_Molecules", sep="_")))
+
+Summary_table_L_Significant <- Summary_table_L %>% filter(str_detect(metabolite, c("Alanine","GABA")))
+
+f1 <- ggplot(Summary_table_L_Significant, aes(x = Time, y = mean, group = Treatment, colour = Treatment)) + 
+  geom_line(aes(group = Treatment)) + 
+  geom_point(aes(shape = Treatment)) + 
+  scale_shape_manual(values = c(15:18)) +
+  scale_color_manual(values=c("grey77", "darkorange2", "skyblue3"))+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se, group = Treatment), width = 0.3) +
+  theme_bw() + 
+  scale_y_continuous(labels = percent) +
+  scale_x_continuous(breaks=seq(0,17,1))
+f2 <- f1 + facet_wrap(~metabolite, scales="fixed") + 
+  ylab("% Enrichment") + 
+  xlab("Time (min)") 
+
+ggsave(filename = paste("InHouse_", Class, "_Scatterplot_Significant.pdf", sep=""), plot = f2, dpi = 600, units = "cm", width = 80, height = 80, scale = 0.5)
