@@ -128,9 +128,8 @@ ggsave(filename = paste("InHouse_", Class, "_Scatterplot_Significant_2.pdf", sep
 
 
 # Barplot ####
-##    ALL ####
+##    ALL
 Summary_table_L <- Summary_table %>% filter(str_detect(Labeling, "L"))
-
 
 f1 <- ggplot(Summary_table_L, aes(x = Time, y = mean, fill = Treatment)) + 
   geom_bar(stat = "identity", position = 'dodge', ) + 
@@ -147,7 +146,7 @@ ggsave(filename = paste("InHouse_", Class, "_Barplot.pdf", sep=""), plot = f2, d
 
 
 
-##   Significant only ####
+##   Significant only 
 OA_Significant_Molecules <- "Aconitate|Citrate|Hydroxyglutarate|Isocitrate|Oxoglutarate"
 #Pyruvate, Succinare, Oxalate and Oxaloacetate P<0.05 but removed because non-sense 
 
