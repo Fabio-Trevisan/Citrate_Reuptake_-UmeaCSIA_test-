@@ -8,8 +8,6 @@ library(purrr)
 library(agricolae)
 library(reshape2)
 
-#1-WAY ANOVA AND POST HOC TEST ON TREATMENT AND TIME OF SIGNIFICANT MOLECULES
-
 
 #OA
 # Read CSV ####
@@ -48,10 +46,11 @@ vector_Treatment <- levels(factor(df$Treatment))
 vector_Time <- levels(factor(df$Time))
 vector_Labeling <- levels(factor(df$Labeling)) #write vectors for subseting
 
-#Replace 0
+#Replace 0 with random values of 1/10 +/- 10% of min value
 df["mean_enrichment"][df["mean_enrichment"]==0] <- NA #raplace meanenrichment 0 values with 1/10 ot 1/100 of min values
 x <- min(df$mean_enrichment, na.rm = T)/10 #calculate min values/10
-df[is.na(df)] <- x #raplace meanenrichment 0 values with 1/10 of min values
+df[is.na(df)] <-  runif(sum(is.na(df)), min = x-(x/10), max = x+(x/10))
+
 
 
 ##    Subset according to metabolite - Treatment - Time ####
@@ -104,7 +103,6 @@ sink(NULL)
 
 ##2. Normality
 ##Shapiro-Wilk test for all single Treatments 
-#--> Randomized null values to work (rank test anyway since they are probebly not normally distributed)
 SW_test_Labeled <- df %>%
   group_by(Labeling, Time, Treatment, metabolite) %>%
   shapiro_test(mean_enrichment)
@@ -112,9 +110,9 @@ write.table(SW_test_Labeled, file = paste("InHouse_", Class, "_ShapiroWilk_test_
 
 ##3. Indipendency
 #Data are indepent by experimental design!
-  
-  
-  
+
+
+
 # 3way ANOVA ####
 ##for each Metabolite test treatment, time and LvsU
 ThreeWay_Anova <- lapply(split(df, df$metabolite), function(i){
@@ -140,8 +138,16 @@ TwoWay_Anova <- lapply(vector_metabolite, function(m){
 })
 names(TwoWay_Anova) <- vector_metabolite #add names
 
+write.table(TwoWay_Anova, file = paste("InHouse_", Class, "_TwoWay_Anova.csv", sep=""), quote = FALSE, sep = ";")
+
+sink(paste("InHouse_", Class, "_TwoWay_Anova_2.0.csv", sep=""))
+TwoWay_Anova
+sink(NULL)
+
+
 
 # Kruskal Wallis on Labeled samples ####
+# for Treatment and Time comparisons
 ## The post hoc nonparametrics tests (kruskal) are using the criterium Fisher's least significant difference (LSD)
 ##Treatment
 KW_Tr <- lapply(vector_metabolite, function(m){
@@ -192,61 +198,7 @@ sink(NULL)
 
 
 
-##  Treatment for post hoc ####
-OneWay_Anova_Ti <- lapply(vector_metabolite, function(m){
-  lapply(split(Subsets[[m]], Subsets[[m]][["Treatment"]]), function(i){ 
-    aov(mean_enrichment ~ Time, data = i)
-  })
-})
-names(OneWay_Anova_Ti) <- vector_metabolite
-
-##Time for print
-OneWay_Anova_Ti2 <- lapply(vector_metabolite, function(m){
-  lapply(split(Subsets[[m]], Subsets[[m]][["Treatment"]]), function(i){
-    anova(lm(mean_enrichment ~ Time, data = i))
-  })
-})
-names(OneWay_Anova_Ti2) <- vector_metabolite
-
-##OneWayAnova save
-sink("")
-OneWay_Anova_Ti2 
-sink(NULL)
-
-
-
-###   Tukey as post hoc test ####
-##Time
-HSD_Ti <- lapply(vector_Species_Tissue, function(m){
-  lapply(names(OneWay_Anova_Ti[[m]]), function(i){ 
-    HSD.test(OneWay_Anova_Ti[[m]][[i]], "Time")
-  })
-})
-names(HSD_Ti) <- vector_Species_Tissue
-for(i in vector_Species_Tissue) {
-  list <- names(OneWay_Anova_Ti[[i]]) 
-  names(HSD_Ti[[i]]) <- list
-}
-
-##HSD_test save
-##Time
-HSD_Ti_groups <- lapply(vector_Species_Tissue, function(i){
-  lapply(names(OneWay_Anova_Ti[[i]]), function(m){
-    as.data.frame(HSD_Ti[[i]][[m]][["groups"]])
-  })
-})
-names(HSD_Ti_groups) <- vector_Species_Tissue
-for(i in vector_Species_Tissue) {
-  list <- names(OneWay_Anova_Ti[[i]]) 
-  names(HSD_Ti_groups[[i]]) <- list
-}
-sink("")
-HSD_Ti_groups 
-sink(NULL)
-
-
-
-# T-Test (wilcox.test) #### 
+# T-Test (wilcox.test) UvsL#### 
 # Wilcoxon Mann Withney U-test or Wilcoxon Rank sum test for INDIPENDENT data
 # not the Wilcoxon sign test for DEPENDENT samples
 #greater --> for testing L > U (REAL HYPOTHESIS)

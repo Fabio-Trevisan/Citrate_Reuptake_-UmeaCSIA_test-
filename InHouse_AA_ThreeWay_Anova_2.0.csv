@@ -148,8 +148,8 @@ Analysis of Variance Table
 Response: mean_enrichment
                         Df     Sum Sq    Mean Sq  F value Pr(>F)    
 Labeling                 1 0.00000038 3.7700e-07   0.2775 0.5996    
-Treatment                2 0.00050068 2.5034e-04 184.2346 <2e-16 ***
-Time                     3 0.00000171 5.7100e-07   0.4199 0.7391    
+Treatment                2 0.00050068 2.5034e-04 184.2345 <2e-16 ***
+Time                     3 0.00000171 5.7100e-07   0.4200 0.7391    
 Labeling:Treatment       2 0.00000092 4.6000e-07   0.3388 0.7135    
 Labeling:Time            3 0.00000840 2.8000e-06   2.0605 0.1106    
 Treatment:Time           6 0.00000974 1.6230e-06   1.1942 0.3161    
@@ -244,7 +244,7 @@ Analysis of Variance Table
 Response: mean_enrichment
                         Df    Sum Sq    Mean Sq F value    Pr(>F)    
 Labeling                 1 0.0000004 0.00000036  0.0067  0.934824    
-Treatment                2 0.0060147 0.00300733 56.7107 < 2.2e-16 ***
+Treatment                2 0.0060147 0.00300733 56.7108 < 2.2e-16 ***
 Time                     3 0.0000258 0.00000859  0.1621  0.921630    
 Labeling:Treatment       2 0.0000590 0.00002948  0.5560  0.575356    
 Labeling:Time            3 0.0000519 0.00001731  0.3265  0.806207    
