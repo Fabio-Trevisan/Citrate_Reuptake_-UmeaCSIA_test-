@@ -8,20 +8,20 @@ library(purrr)
 library(agricolae)
 library(reshape2)
 
-#RUN 2-WAY, 1-WAY ANOVA AND POST HOC TEST ON TREATMENT AND TIME OF SIGNIFICANT MOLECULES
-#OBVIOUSLY re-run whole script with new dataset blank and FW corrected
+#1-WAY ANOVA AND POST HOC TEST ON TREATMENT AND TIME OF SIGNIFICANT MOLECULES
+
 
 #OA
-#Read CSV ####
+# Read CSV ####
 table <- read.csv("20230711 3-NPH acids from in-house script_IsoCor_res.tsv", sep="\t", header=T)
 Class <- "OA"
 
 #AA
-#Read CSV ####
+# Read CSV ####
 table <- read.csv("20230714_AccQ-Tag_AA_peak areas_inhouse_script 2.0_IsoCor_res.tsv", sep="\t", header=T)
 Class <- "AA"
 
-#Dataset preparation ####
+# Dataset preparation ####
 #cleaning
 df <- table[,-c(3,5:9)] #remove un-useful columns
 df <- df[df$isotopologue<=0,] #filter only isotopologue M+0
@@ -54,7 +54,7 @@ x <- min(df$mean_enrichment, na.rm = T)/10 #calculate min values/10
 df[is.na(df)] <- x #raplace meanenrichment 0 values with 1/10 of min values
 
 
-##Subset according to metabolite - Treatment - Time ####
+##    Subset according to metabolite - Treatment - Time ####
 #metabolite
 Subset <- lapply(vector_metabolite, function(i){ 
   i <- subset(df, metabolite == i)
@@ -92,28 +92,7 @@ for(i in vector_metabolite) {
 
 
 
-#Summary Table ####
-Summary_table <- ddply(df, c("metabolite", "Time", "Labeling", "Treatment"), summarise,
-                               N    = sum(!is.na(mean_enrichment)),
-                               mean = mean(mean_enrichment, na.rm=TRUE),
-                               sd   = sd(mean_enrichment, na.rm=TRUE),
-                               se   = sd / sqrt(N))
-write.table(Summary_table, file = paste("InHouse_", Class, "_Summary_table.csv", sep=""), 
-            quote = FALSE, sep = ";")
-
-
-Enrichment_mean <- dcast(Summary_table, metabolite + Time + Treatment ~ Labeling, value.var = "mean") #cast (inverse of melt) to reorganize table and be able to find difference in labeling
-Enrichment_se <- dcast(Summary_table, metabolite + Time + Treatment ~ Labeling, value.var = "se") #cast (inverse of melt) to reorganize table and be able to find "se" in labeling
-
-Enrichment_df <- Enrichment_mean #combine means and se for both L and U
-Enrichment_df$L_se <- Enrichment_se$L
-Enrichment_df$U_se <- Enrichment_se$U
-Enrichment_df <- Enrichment_df[, c(1, 2, 3, 4, 6, 5, 7)] #reorder columns
-Enrichment_df$Enrichment <- Enrichment_df$L - Enrichment_df$U #calculate delta enrichment
-
-
-
-#Assumptions ####
+# Assumptions ####
 ## 1. Homogeneity of variances
 ##Labeling*Time*Treatment
 Levene_test <- lapply(split(df, df$metabolite), function(i){
@@ -125,7 +104,7 @@ sink(NULL)
 
 ##2. Normality
 ##Shapiro-Wilk test for all single Treatments 
-#--> Randomized null values to work (NOT important since data are not homogenous, hence rank test anyway)
+#--> Randomized null values to work (rank test anyway since they are probebly not normally distributed)
 SW_test_Labeled <- df %>%
   group_by(Labeling, Time, Treatment, metabolite) %>%
   shapiro_test(mean_enrichment)
@@ -136,8 +115,8 @@ write.table(SW_test_Labeled, file = paste("InHouse_", Class, "_ShapiroWilk_test_
   
   
   
-#3way ANOVA ####
-##Multiple metabolite Labeled
+# 3way ANOVA ####
+##for each Metabolite test treatment, time and LvsU
 ThreeWay_Anova <- lapply(split(df, df$metabolite), function(i){
   anova(lm(mean_enrichment ~ Labeling * Treatment * Time, data = i))
 })
@@ -149,7 +128,125 @@ sink(NULL)
 
 
 
-#T-Test (wilcox.test) #### 
+# 2way ANOVA on Labeled samples ####
+Subset_L <- lapply(vector_metabolite, function(m){
+  Subset[[m]] %>%
+    filter(str_detect(Labeling, "L"))
+}) # remove Unlabeled values since stat will be done comparing labeled values/samples
+names(Subset_L) <- vector_metabolite #add names
+
+TwoWay_Anova <- lapply(vector_metabolite, function(m){
+    anova(lm(mean_enrichment ~ Treatment * Time, data = Subset_L[[m]]))
+})
+names(TwoWay_Anova) <- vector_metabolite #add names
+
+
+# Kruskal Wallis on Labeled samples ####
+## The post hoc nonparametrics tests (kruskal) are using the criterium Fisher's least significant difference (LSD)
+##Treatment
+KW_Tr <- lapply(vector_metabolite, function(m){
+  lapply(split(Subset_L[[m]], Subset_L[[m]][["Time"]]), function(i){ 
+    kruskal(i$mean_enrichment, i$Treatment, p.adj = "fdr")
+  })
+})
+names(KW_Tr) <- vector_metabolite
+
+##Time
+KW_Ti <- lapply(vector_metabolite, function(m){
+  lapply(split(Subset_L[[m]], Subset_L[[m]][["Treatment"]]), function(i){ 
+    kruskal(i$mean_enrichment, i$Time, p.adj = "fdr")
+  })
+})
+names(KW_Ti) <- vector_metabolite
+
+## Save
+##Treatment
+KW_Tr_groups <- lapply(vector_metabolite, function(i){
+  lapply(names(KW_Tr[[i]]), function(m){
+    as.data.frame(KW_Tr[[i]][[m]][["groups"]])
+  })
+})
+names(KW_Tr_groups) <- vector_metabolite
+for(i in vector_metabolite) {
+  list <- names(KW_Tr[[i]]) 
+  names(KW_Tr_groups[[i]]) <- list
+}
+sink(paste("InHouse_", Class, "_KW_Tr.csv", sep=""))
+KW_Tr_groups 
+sink(NULL)
+
+##Time
+KW_Ti_groups <- lapply(vector_metabolite, function(i){
+  lapply(names(KW_Ti[[i]]), function(m){
+    as.data.frame(KW_Ti[[i]][[m]][["groups"]])
+  })
+})
+names(KW_Ti_groups) <- vector_metabolite
+for(i in vector_metabolite) {
+  list <- names(KW_Ti[[i]]) 
+  names(KW_Ti_groups[[i]]) <- list
+}
+sink(paste("InHouse_", Class, "_KW_Ti.csv", sep=""))
+KW_Ti_groups 
+sink(NULL)
+
+
+
+##  Treatment for post hoc ####
+OneWay_Anova_Ti <- lapply(vector_metabolite, function(m){
+  lapply(split(Subsets[[m]], Subsets[[m]][["Treatment"]]), function(i){ 
+    aov(mean_enrichment ~ Time, data = i)
+  })
+})
+names(OneWay_Anova_Ti) <- vector_metabolite
+
+##Time for print
+OneWay_Anova_Ti2 <- lapply(vector_metabolite, function(m){
+  lapply(split(Subsets[[m]], Subsets[[m]][["Treatment"]]), function(i){
+    anova(lm(mean_enrichment ~ Time, data = i))
+  })
+})
+names(OneWay_Anova_Ti2) <- vector_metabolite
+
+##OneWayAnova save
+sink("")
+OneWay_Anova_Ti2 
+sink(NULL)
+
+
+
+###   Tukey as post hoc test ####
+##Time
+HSD_Ti <- lapply(vector_Species_Tissue, function(m){
+  lapply(names(OneWay_Anova_Ti[[m]]), function(i){ 
+    HSD.test(OneWay_Anova_Ti[[m]][[i]], "Time")
+  })
+})
+names(HSD_Ti) <- vector_Species_Tissue
+for(i in vector_Species_Tissue) {
+  list <- names(OneWay_Anova_Ti[[i]]) 
+  names(HSD_Ti[[i]]) <- list
+}
+
+##HSD_test save
+##Time
+HSD_Ti_groups <- lapply(vector_Species_Tissue, function(i){
+  lapply(names(OneWay_Anova_Ti[[i]]), function(m){
+    as.data.frame(HSD_Ti[[i]][[m]][["groups"]])
+  })
+})
+names(HSD_Ti_groups) <- vector_Species_Tissue
+for(i in vector_Species_Tissue) {
+  list <- names(OneWay_Anova_Ti[[i]]) 
+  names(HSD_Ti_groups[[i]]) <- list
+}
+sink("")
+HSD_Ti_groups 
+sink(NULL)
+
+
+
+# T-Test (wilcox.test) #### 
 # Wilcoxon Mann Withney U-test or Wilcoxon Rank sum test for INDIPENDENT data
 # not the Wilcoxon sign test for DEPENDENT samples
 #greater --> for testing L > U (REAL HYPOTHESIS)
@@ -190,8 +287,8 @@ for(i in vector_metabolite) {
 
 
 
-#P-Value print in original table ####
-##P-Value df preparation ####
+# P-Value print in original table ####
+##  P-Value df preparation ####
 Wilcox_test_greater_PValue <- lapply(vector_metabolite, function(m){
   lapply(names(Wilcox_test_greater[[m]]), function(i){ 
     lapply(names(Wilcox_test_greater[[m]][[i]]), function(n){
@@ -219,7 +316,7 @@ for(i in vector_metabolite) {
 
 
 
-##Transform list in dataframe ####
+##  Transform list in dataframe ####
 P_Value <- lapply(vector_metabolite, function(m){
   lapply(names(Wilcox_test_greater[[m]]), function(i){ 
     do.call(rbind.data.frame, Wilcox_test_greater_PValue[[m]][[i]])
@@ -258,20 +355,34 @@ rownames(P_Value_df) <- NULL #rename Rows
 
 
 
-##Combining df ####
+# Summary Table & Mean Enrichment ####
+Summary_table <- ddply(df, c("metabolite", "Time", "Labeling", "Treatment"), summarise,
+                       N    = sum(!is.na(mean_enrichment)),
+                       mean = mean(mean_enrichment, na.rm=TRUE),
+                       sd   = sd(mean_enrichment, na.rm=TRUE),
+                       se   = sd / sqrt(N))
+write.table(Summary_table, file = paste("InHouse_", Class, "_Summary_table.csv", sep=""), 
+            quote = FALSE, sep = ";")
+
+
+Enrichment_mean <- dcast(Summary_table, metabolite + Time + Treatment ~ Labeling, value.var = "mean") #cast (inverse of melt) to reorganize table and be able to find difference in labeling
+Enrichment_se <- dcast(Summary_table, metabolite + Time + Treatment ~ Labeling, value.var = "se") #cast (inverse of melt) to reorganize table and be able to find "se" in labeling
+
+Enrichment_df <- Enrichment_mean #combine means and se for both L and U
+Enrichment_df$L_se <- Enrichment_se$L
+Enrichment_df$U_se <- Enrichment_se$U
+Enrichment_df <- Enrichment_df[, c(1, 2, 3, 4, 6, 5, 7)] #reorder columns
+Enrichment_df$Enrichment <- Enrichment_df$L - Enrichment_df$U #calculate delta enrichment
+
+
+
+##  Combining df ####
 Enrichment_df$P_Value <- P_Value_df$P_Value  #Combine df --> add column with P_Values to original table
 
-##P Value filtering ####
+##  P Value filtering ####
 z <- 0.05 #filtering ratio
 Filtered <- Enrichment_df[Enrichment_df$`P_Value`<z,] #P_Value filtering >z
 
-#save
+##  Save ####
 write.table(Enrichment_df, file = paste("InHouse_", Class, "_Enrichment.csv", sep=""), row.names=FALSE, sep = ";")
 write.table(Filtered, file = paste("InHouse_", Class, "_Significant_Enrichment.csv", sep=""), row.names=FALSE, sep = ";")
-
-
-
-#1way ANOVA on enrichment ####
-#Treatment and Time statistics####
-
-
