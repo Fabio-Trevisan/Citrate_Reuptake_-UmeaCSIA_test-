@@ -1,6 +1,6 @@
 library(readr)
 library(ggpubr)
-library(ggplot)
+library(ggplot2)
 library(tidyverse)
 library(plyr)
 library(dplyr)
@@ -10,10 +10,7 @@ library(agricolae)
 library(reshape2)
 
 
-#Histogram delta enrichment (1 for each molecule, time as x, treatment as colour)
-#THINK ON HOW TO OBTAIN ARRORBARS ON MEAN ENRICHMENT
-
-
+#TO DO
 #Histogram for each molecule and time to show isotopologues enrichment 
 
 #OA
@@ -62,6 +59,15 @@ df[is.na(df)] <-  runif(sum(is.na(df)), min = x-(x/10), max = x+(x/10))
 
 
 
+# Vector Significan Molecules ####
+OA_Significant_Molecules <- "Aconitate|Citrate|Hydroxyglutarate|Isocitrate|Oxoglutarate"
+#Pyruvate, Succinare, Oxalate and Oxaloacetate P<0.05 but removed because non-sense 
+
+AA_Significant_Molecules <- "Aspartate|Citrulline|GABA|Glutamate|Glutamine"
+#Lysine and Alanine 0.05<P<0.10 
+
+
+
 # Summary table ####
 Summary_table <- ddply(df, c("metabolite", "Time", "Labeling", "Treatment"), summarise,
                        N    = sum(!is.na(mean_enrichment)),
@@ -69,38 +75,14 @@ Summary_table <- ddply(df, c("metabolite", "Time", "Labeling", "Treatment"), sum
                        sd   = sd(mean_enrichment, na.rm=TRUE),
                        se   = sd / sqrt(N))
 
+Summary_table_L <- Summary_table %>% filter(str_detect(Labeling, "L"))
+
 
 
 # Scatterplot ####
-##    ALL 
-Summary_table_L <- Summary_table %>% filter(str_detect(Labeling, "L"))
+##   Significant only 
 Summary_table_L$Time <- as.character(Summary_table_L$Time)
 Summary_table_L$Time <- as.numeric(Summary_table_L$Time)
-
-f1 <- ggplot(Summary_table_L, aes(x = Time, y = mean, group = Treatment, colour = Treatment)) + 
-  geom_line(aes(group = Treatment)) + 
-  geom_point(aes(shape = Treatment)) + 
-  scale_shape_manual(values = c(15:18)) +
-  scale_color_manual(values=c("grey77", "darkorange2", "skyblue3"))+
-  geom_errorbar(aes(ymin = mean-se, ymax = mean+se, group = Treatment), width = 5) +
-  theme_bw() + 
-  scale_y_continuous(labels = percent) +
-  scale_x_continuous(breaks=seq(0,120,15))
-f2 <- f1 + facet_wrap(~metabolite, scales="free") + 
-  ylab("% Enrichment") + 
-  xlab("Time (min)") 
-
-ggsave(filename = paste("InHouse_", Class, "_Scatterplot.pdf", sep=""), plot = f2, dpi = 600, units = "cm", width = 80, height = 80, scale = 0.5)
-
-
-
-##   Significant only 
-OA_Significant_Molecules <- "Aconitate|Citrate|Hydroxyglutarate|Isocitrate|Oxoglutarate"
-#Pyruvate, Succinare, Oxalate and Oxaloacetate P<0.05 but removed because non-sense 
-
-AA_Significant_Molecules <- "Aspartate|Citrulline|GABA|Glutamate|Glutamine"
-#Lysine and Alanine 0.05<P<0.10 
-
 if (Class == "AA") {
   Summary_table_L_Significant <- Summary_table_L %>% 
     filter(str_detect(metabolite, gsub('["]', '', AA_Significant_Molecules)))
@@ -123,36 +105,12 @@ f4 <- f3 + facet_wrap(~metabolite, scales="fixed") +
   xlab("Time (min)") 
 f4
 
-ggsave(filename = paste("InHouse_", Class, "_Scatterplot_Significant_2.pdf", sep=""), plot = f4, dpi = 600, units = "cm", width = 80, height = 50, scale = 0.3)
+ggsave(filename = paste("InHouse_", Class, "_Scatterplot_Significant.pdf", sep=""), plot = f4, dpi = 600, units = "cm", width = 80, height = 60, scale = 0.35)
 
 
 
 # Barplot ####
-##    ALL
-Summary_table_L <- Summary_table %>% filter(str_detect(Labeling, "L"))
-
-f1 <- ggplot(Summary_table_L, aes(x = Time, y = mean, fill = Treatment)) + 
-  geom_bar(stat = "identity", position = 'dodge', ) + 
-  geom_errorbar(aes(ymin = mean-se, ymax = mean+se, group = Treatment), width = 0.5 , position = position_dodge(.9)) +
-  scale_fill_manual(values=c("grey77", "darkorange2", "skyblue3")) +
-  theme_bw() + 
-  scale_y_continuous(labels = percent)
-f2 <- f1 + facet_wrap(~metabolite, scales="free") + 
-  ylab("% Enrichment") + 
-  xlab("Time (min)") 
-f2
-
-ggsave(filename = paste("InHouse_", Class, "_Barplot.pdf", sep=""), plot = f2, dpi = 600, units = "cm", width = 80, height = 80, scale = 0.5)
-
-
-
 ##   Significant only 
-OA_Significant_Molecules <- "Aconitate|Citrate|Hydroxyglutarate|Isocitrate|Oxoglutarate"
-#Pyruvate, Succinare, Oxalate and Oxaloacetate P<0.05 but removed because non-sense 
-
-AA_Significant_Molecules <- "Aspartate|Citrulline|GABA|Glutamate|Glutamine"
-#Lysine and Alanine 0.05<P<0.10 
-
 if (Class == "AA") {
   Summary_table_L_Significant <- Summary_table_L %>% 
     filter(str_detect(metabolite, gsub('["]', '', AA_Significant_Molecules)))
@@ -162,14 +120,45 @@ if (Class == "AA") {
 }
 
 f3 <- ggplot(Summary_table_L_Significant, aes(x = Time, y = mean, fill = Treatment)) + 
-  geom_bar(stat = "identity", position = 'dodge', ) + 
-  geom_errorbar(aes(ymin = mean-se, ymax = mean+se, group = Treatment), width = 0.5 , position = position_dodge(.9)) +
+  geom_bar(stat = "identity", position = 'dodge', width = 0.8) + 
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se, group = Treatment), width = 0.5 , position = position_dodge(.8)) +
   scale_fill_manual(values=c("grey77", "darkorange2", "skyblue3")) +
   theme_bw() + 
   scale_y_continuous(labels = percent)
-f4 <- f3 + facet_wrap(~metabolite, scales="free") + 
+f4 <- f3 + facet_wrap(~metabolite, scales="fixed") + 
   ylab("% Enrichment") + 
   xlab("Time (min)") 
 f4
 
-ggsave(filename = paste("InHouse_", Class, "_Barplot_Significant_2.pdf", sep=""), plot = f4, dpi = 600, units = "cm", width = 80, height = 50, scale = 0.3)
+ggsave(filename = paste("InHouse_", Class, "_Barplot_Significant.pdf", sep=""), plot = f4, dpi = 600, units = "cm", width = 80, height = 60, scale = 0.35)
+
+
+
+# SideBySide Boxlot + trendline ####
+df2 <- df %>% filter(str_detect(Labeling, "L"))
+if (Class == "AA") {
+  df3 <- df2 %>% 
+    filter(str_detect(metabolite, gsub('["]', '', AA_Significant_Molecules)))
+} else { 
+  df3 <- df2 %>% 
+    filter(str_detect(metabolite, gsub('["]', '', OA_Significant_Molecules)))
+}
+
+trendline <- geom_smooth(aes(group = Treatment, color = Treatment, fill = Treatment), method=lm, alpha = 0.1, linetype="dashed") 
+
+f5 <- ggplot(df3, aes(x = factor(Time), y = mean_enrichment, fill = Treatment)) +  
+  trendline +
+  stat_boxplot(geom="errorbar") +
+  geom_boxplot() +
+  theme_bw() + 
+  scale_fill_manual(values=c("grey77","darkorange2", "skyblue3")) +
+  scale_color_manual(values=c("grey77","darkorange2", "skyblue3")) +
+  scale_y_continuous(labels = percent) +
+  stat_regline_equation()
+
+f6 <- f5 + facet_wrap(~metabolite, scales="fixed")+
+  ylab("% Enrichment") + 
+  xlab("Time (min)") 
+f6
+
+ggsave(filename = paste("InHouse_", Class, "_BoxPlot_Significant.pdf", sep=""), plot = f6, dpi = 600, units = "cm", width = 80, height = 60, scale = 0.35)
