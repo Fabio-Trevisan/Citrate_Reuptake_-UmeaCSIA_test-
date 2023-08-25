@@ -8,13 +8,9 @@ library(rstatix)
 library(purrr)
 library(agricolae)
 library(reshape2)
-
 library(scales)
 library(ggbreak)
-library(ggh4x)
 
-#TO DO
-#Histogram for each molecule and time to show isotopologues enrichment 
 
 #OA
 # Read CSV ####
@@ -82,36 +78,6 @@ Summary_table_L <- Summary_table %>% filter(str_detect(Labeling, "L"))
 
 
 
-# Scatterplot ####
-##   Significant only 
-Summary_table_L$Time <- as.character(Summary_table_L$Time)
-Summary_table_L$Time <- as.numeric(Summary_table_L$Time)
-if (Class == "AA") {
-  Summary_table_L_Significant <- Summary_table_L %>% 
-    filter(str_detect(metabolite, gsub('["]', '', AA_Significant_Molecules)))
-} else { 
-  Summary_table_L_Significant <- Summary_table_L %>% 
-    filter(str_detect(metabolite, gsub('["]', '', OA_Significant_Molecules)))
-}
-
-f3 <- ggplot(Summary_table_L_Significant, aes(x = Time, y = mean, group = Treatment, colour = Treatment)) + 
-  geom_line(aes(group = Treatment)) + 
-  geom_point(aes(shape = Treatment)) + 
-  scale_shape_manual(values = c(15:18)) +
-  scale_color_manual(values=c("grey77", "darkorange2", "skyblue3"))+
-  geom_errorbar(aes(ymin = mean-se, ymax = mean+se, group = Treatment), width = 5) +
-  theme_bw() + 
-  scale_y_continuous(labels = percent, breaks = seq(0, 0.04, 0.01), limits = c(0, 0.044)) +
-  scale_x_continuous(breaks=seq(0,120,15))
-f4 <- f3 + facet_wrap(~metabolite, scales="free") + 
-  ylab("% Enrichment") + 
-  xlab("Time (min)") 
-f4
-
-ggsave(filename = paste("InHouse_", Class, "_Scatterplot_Significant_2.pdf", sep=""), plot = f4, dpi = 600, units = "cm", width = 80, height = 60, scale = 0.35)
-
-
-
 # Barplot ####
 ##   Significant only 
 if (Class == "AA") {
@@ -134,6 +100,36 @@ f4 <- f3 + facet_wrap(~metabolite, scales="fixed") +
 f4
 
 ggsave(filename = paste("InHouse_", Class, "_Barplot_Significant.pdf", sep=""), plot = f4, dpi = 600, units = "cm", width = 80, height = 60, scale = 0.35)
+
+
+
+# Scatterplot ####
+##   Significant only 
+Summary_table_L$Time <- as.character(Summary_table_L$Time)
+Summary_table_L$Time <- as.numeric(Summary_table_L$Time)
+if (Class == "AA") {
+  Summary_table_L_Significant <- Summary_table_L %>% 
+    filter(str_detect(metabolite, gsub('["]', '', AA_Significant_Molecules)))
+} else { 
+  Summary_table_L_Significant <- Summary_table_L %>% 
+    filter(str_detect(metabolite, gsub('["]', '', OA_Significant_Molecules)))
+}
+
+f3 <- ggplot(Summary_table_L_Significant, aes(x = Time, y = mean, group = Treatment, colour = Treatment)) + 
+  geom_line(aes(group = Treatment)) + 
+  geom_point(aes(shape = Treatment)) + 
+  scale_shape_manual(values = c(15:18)) +
+  scale_color_manual(values=c("grey77", "darkorange2", "skyblue3"))+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se, group = Treatment), width = 5) +
+  theme_bw() + 
+  scale_y_continuous(labels = percent, breaks = seq(0, 0.07, 0.01)) +
+  scale_x_continuous(breaks=seq(0,120,15))
+f4 <- f3 + facet_wrap(~metabolite, scales="fixed") + 
+  ylab("% Enrichment") + 
+  xlab("Time (min)") 
+f4
+
+ggsave(filename = paste("InHouse_", Class, "_Scatterplot_Significant_2.pdf", sep=""), plot = f4, dpi = 600, units = "cm", width = 80, height = 60, scale = 0.35)
 
 
 
@@ -247,4 +243,3 @@ f8 <- f7 +  facet_wrap(~metabolite+Treatment, scales="fixed", ncol = 3) +
 f8
 
 ggsave(filename = paste("InHouse_", Class, "_Barplot_Isotopologues.pdf", sep=""), plot = f8, dpi = 600, units = "cm", width = 100, height = 150, scale = 0.3)
-
