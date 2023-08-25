@@ -8,6 +8,8 @@ library(rstatix)
 library(purrr)
 library(agricolae)
 library(reshape2)
+
+library(scales)
 library(ggbreak)
 library(ggh4x)
 
@@ -60,7 +62,7 @@ df[is.na(df)] <-  runif(sum(is.na(df)), min = x-(x/10), max = x+(x/10))
 
 
 
-# Vector Significan Molecules ####
+# Vector Significant Molecules ####
 OA_Significant_Molecules <- "Aconitate|Citrate|Hydroxyglutarate|Isocitrate|Oxoglutarate"
 #Pyruvate, Succinare, Oxalate and Oxaloacetate P<0.05 but removed because non-sense 
 
@@ -99,7 +101,7 @@ f3 <- ggplot(Summary_table_L_Significant, aes(x = Time, y = mean, group = Treatm
   scale_color_manual(values=c("grey77", "darkorange2", "skyblue3"))+
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se, group = Treatment), width = 5) +
   theme_bw() + 
-  scale_y_continuous(labels = percent) +
+  scale_y_continuous(labels = percent, breaks = seq(0, 0.04, 0.01), limits = c(0, 0.044)) +
   scale_x_continuous(breaks=seq(0,120,15))
 f4 <- f3 + facet_wrap(~metabolite, scales="free") + 
   ylab("% Enrichment") + 
@@ -222,28 +224,27 @@ if (Class == "AA") {
   Summary_table_L_Significant <- Summary_table_L %>% 
     filter(str_detect(metabolite, gsub('["]', '', OA_Significant_Molecules)))
 }
+if (Class == "AA") {
+  a <- c(0.25, 0.79)
+  b <- 1
+} else { 
+  a <- c(0.15, 0.84)
+  b <- 1.3
+}
 
 f7 <- ggplot(Summary_table_L_Significant, aes(x = isotopologue, y = mean, fill = Time)) + 
   geom_bar(stat = "identity", position = 'dodge', width = 0.8) + 
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se, group = Time), width = 0.5, position = position_dodge(0.8)) +
   scale_fill_manual(values=c("grey77", "skyblue3", "blue", "navy")) +
   theme_bw() + 
-  scale_x_continuous(breaks=seq(0,6,1)) +
-  scale_y_continuous(labels = percent)
+  scale_x_continuous(breaks=seq(0,6,1))
 
-f8 <- f7 + facet_wrap(~metabolite+Treatment, scales="fixed", ncol = 3) +
+f8 <- f7 +  facet_wrap(~metabolite+Treatment, scales="fixed", ncol = 3) +
   ylab("% Enrichment") + 
-  xlab("Isotopologue") 
-f8 
+  xlab("Isotopologue") +
+  scale_y_break(a,  scales = b) +
+  scale_y_continuous(breaks = seq(0, 1 , 0.05), labels = percent) 
+f8
 
-#Breaks NOT WORKING
-scale_y_break(c(0.10, 0.85))
-scale_y_cut(breaks = 0.1)
-scale_y_continuous(labels = percent, limits = c(NA, 0.10), oob = scales::oob_keep) +
-scale_y_continuous(labels = percent, limits = c(0.85, NA), oob = scales::oob_keep)
-
-
-
-ggsave(filename = paste("InHouse_", Class, "_Barplot_Isotopologues.pdf", sep=""), plot = f8, dpi = 600, units = "cm", width = 100, height = 200, scale = 0.3)
-
+ggsave(filename = paste("InHouse_", Class, "_Barplot_Isotopologues.pdf", sep=""), plot = f8, dpi = 600, units = "cm", width = 100, height = 150, scale = 0.3)
 
