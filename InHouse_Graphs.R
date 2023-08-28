@@ -122,14 +122,14 @@ f3 <- ggplot(Summary_table_L_Significant, aes(x = Time, y = mean, group = Treatm
   scale_color_manual(values=c("grey77", "darkorange2", "skyblue3"))+
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se, group = Treatment), width = 5) +
   theme_bw() + 
-  scale_y_continuous(labels = percent, breaks = seq(0, 0.07, 0.01)) +
+  scale_y_continuous(labels = percent, breaks = seq(0, 0.07, 0.005)) +
   scale_x_continuous(breaks=seq(0,120,15))
-f4 <- f3 + facet_wrap(~metabolite, scales="fixed") + 
+f4 <- f3 + facet_wrap(~metabolite, scales="free") + 
   ylab("% Enrichment") + 
   xlab("Time (min)") 
 f4
 
-ggsave(filename = paste("InHouse_", Class, "_Scatterplot_Significant.pdf", sep=""), plot = f4, dpi = 600, units = "cm", width = 80, height = 60, scale = 0.35)
+ggsave(filename = paste("InHouse_", Class, "_Scatterplot_Significant_2.pdf", sep=""), plot = f4, dpi = 600, units = "cm", width = 80, height = 60, scale = 0.35)
 
 
 
